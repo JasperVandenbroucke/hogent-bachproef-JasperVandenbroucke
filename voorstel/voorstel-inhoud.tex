@@ -57,20 +57,19 @@ Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle no
 Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
+
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+In de initiële fase van het onderzoek zal er een uitgebreide literatuurstudie worden uitgevoerd. De bedoeling van deze fase is om inzicht te krijgen in het onderwerp en het probleemdomein van deze bachelorproef.
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+In een volgende fase zal er onderzoek worden gedaan naar de meest toepasselijke programmeertalen en frameworks om een proof-of-concept (PoC) uit te werken. Hierbij wordt er ook aandacht gezonken aan containerisatietools, namelijk Docker en Kubernetes, die het mogelijk maken om microservices onafhankelijk te ontwikkelen, testen en te beheren.
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+In de derde fase van het onderzoek wordt een effectieve PoC uitgewerkt. Voor deze PoC wordt er beroep gedaan op de technologieën die het best uit literatuurstudie naar voorkomen. In een eerste stap van het uitwerken van deze PoC, zal een monolitische e-commerce webapplicatie gebouwd worden. In een volgende stap wordt diezelfde webapplicatie omgezet naar een microservices webapplicatie. Hierbij zal er rekeninggehouden worden met de best-practices voor het ontwerpen van een microservices-architectuur.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+In de daaropvolgende fase zullen de schaalbaarheid en de complexiteit van beide webapplicaties getest worden. Voor de schaarbaarheidstesten zal er gebruik gemaakt worden van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestanties onder intesief gebruik van de beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld. Hiervoor zal de focus gelegd worden op de ontwikkelings- en onderhoudscomplexiteit van beide applicaties.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
-
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+Tot slot zullen de resultaten van de Apache JMeter testen en de complexiteitsbeoordeling van beide webapplicaties worden geanalyseerd om conclusies te trekken over de schaalbaarheid en complexiteit van de microservices-architectuur ten opzichte van de monolitische aanpak.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
