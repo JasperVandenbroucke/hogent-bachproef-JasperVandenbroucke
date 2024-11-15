@@ -15,22 +15,19 @@
 \section{Inleiding}%
 \label{sec:inleiding}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+Kleine ondernemingen kunnen hun online diensten aanbieden op een simpele, monolitische manier, waarin alles één geheel is. Maar naarmate ondernemingen groeien zal de vraag naar online diensten groeien. Meer gebruikers zullen het online platform gebruiken en het bedrijf wil meer diverse diensten online ter beschikking stellen voor haar gebruikers. Hier kan een monolitische aanpak te kort schieten op bepaalde vlakken.
 
+De ontwikkelaars bij het stagebedrijf Fabrimode nv kwamen met de vraag of het overschakelen van een monolitische architectuur naar een microservices-architectuur nu echt de prestaties van de applicatie verbeteren. Deze bachelorproef zal dan ook vertrekken van deze casus en zal focussen op de schaalbaarheid en complexiteit bij een microservices-architectuur.
+
+De onderzoeksvraag luidt als volgt: Welke impact heeft een microservices-architectuur op de schaalbaarheid en complexiteit op een webapplicatie?
+
+De volgende deelvragen zullen bijdragen tot de conclusie van deze bachelorproef:
 \begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
+	\item Hoe presteert een microservices-architectuur in vergelijking met een monolitische architectuur op het gebied van schaalbaarheid?
+	\item Welke aspecten moeten in acht genomen worden bij het overstappen naar een microservices-architectuur?
 \end{itemize}
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
-
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
-
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+Het doel van deze bachelorproef zal zijn om op basis van testresultaten inzichten te bieden in de schaalbaarheidsbeperkingen van de huidige architectuur en de voordelen van microservices. Daarnaast zullen er ook richtlijnen zijn om de complexiteit zo minimaal te houden.
 
 %---------- Stand van zaken ---------------------------------------------------
 
@@ -41,15 +38,70 @@ Het overschakkelen van een monolitische naar een microservices-architectuur weba
 
 \subsection{Monolitische architectuur}
 
-Allereerst wordt er gekeken naar wat een monolitische architectuur nu juist is. Volgens \textcite{Velepucha2023} is een monolitische architectuur gekenmerkt door het hebben van slechts 1 enkel startpunt. Daarnaast vermelden \textcite{Velepucha2023} dat een monolitische applicatie doorgaans gekenmerkt wordt door verschillende logische lagen. Een referentie architectuur hiervoor is bijvoorbeeld het 3 lagen patroon \autocite{Velepucha2023}. Hierbij wordt de monolitische applicatie gebouwd in 3 lagen die elk hun verantwoordelijkheid dragen, namelijk de presentatie laag, de domein laag en de data laag.
+Allereerst wordt er gekeken naar wat een monolitische architectuur juist is. Volgens \textcite{Velepucha2023} is een monolitische architectuur gekenmerkt door het hebben van slechts 1 enkel startpunt. Daarnaast vermelden \textcite{Velepucha2023} dat een monolitische applicatie doorgaans gekenmerkt wordt door verschillende logische lagen. Een referentie architectuur hiervoor is bijvoorbeeld het 3 lagen patroon \autocite{Velepucha2023}. Hierbij wordt de monolitische applicatie gebouwd in 3 lagen, namelijk de presentatie laag, de domein laag en de data laag, die elk hun verantwoordelijkheid dragen.
 
-\textcite{Blinowski2022} verduidelijken de functie van elk van deze lagen. In de presentatie laag wordt er voornamelijk functionaliteit geplaatst die het voor de gebruiker mogelijk maakt om met de applicatie te interageren. Vervolgens wordt de domein laag gebruikt om te reageren om verzoeken van de gebruiker. Dit kan gaan van het uitvoeren van bepaalde logica tot het ophalen van data uit een databron.
+\textcite{Blinowski2022} verduidelijken de functie van elk van deze lagen. In de presentatie laag wordt er voornamelijk functionaliteit geplaatst die het voor de gebruiker mogelijk maakt om met de applicatie te interageren. Vervolgens wordt de domein laag gebruikt om te reageren om verzoeken van de gebruiker. Dit kan gaan van het uitvoeren van bepaalde domein logica tot het ophalen van data uit een databron.
+
+Monolitische applicaties kunnen succesvol zijn, maar meer mensen ondervinden begrensingen aan deze architectuur \autocite{Lewis2014}. Vooral omdat de vraag naar applicaties die in de cloud worden uitgerold stijgt. Wanneer wijzigingen moeten doorgevoerd worden aan een klein onderdeel van de monolitische architectuur vereist dit dat de volledige applicatie opnieuw gebouwd en uitgerold moet worden. Dit kan leiden tot een slechte structuur van de applicatie. Daarnaast benadrukken \textcite{Lewis2014} het feit dat bij het schalen van een monolitische applicatie de volledige applicatie moet geschaald, in plaats van slechts een specifiek onderdeel.
 
 \subsection{Microservices-architectuur}
 
 \textcite{Thoenes2015} beschrijft een microservice als een kleine applicatie met één enkele verantwoordelijkheid, die individueel uigerold, geschaald en getest kan worden. Het feit dat een microservice slechts één verantwoordelijkheid heeft kan in twee opzichten bekeken worden \autocite{Thoenes2015}. Ten eerste houdt dit in dat een microservice slechts één reden heeft om te worden gewijzigd of vervangen. En ten tweede betekent deze verantwoordelijkheid dat een microservice slechts één taak uitvoert, die ook nog eens eenduidig is.
 
-De microservices-architectuur is een software architectuur waarbij één enkele applicatie wordt gebouwd die bestaat uit verschillende, kleinere microservices \autocite{Lewis2014}. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API).
+De microservices-architectuur is een software architectuur waarbij één enkele applicatie wordt gebouwd die bestaat uit verschillende, kleinere microservices \autocite{Lewis2014}. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). 
+
+\subsection{Kenmerken van microservices-\-architectuur}
+
+\textcite{Lewis2014} identificeren 9 kenmerken van de microservices-architectuur:
+
+\subsubsection{Services opdelen in componenten}
+
+In de software industrie is er al lang een wens om systemen te bouwen doormiddel van componenten samen te voegen, zoals in de reële wereld. De microservices-architectuur gebruikt zijn aparte services als componeneten.
+
+Componenten worden gezien als stukjes software die onafhankelijk vervangbaar en uitbreidbaar zijn.
+
+\subsubsection{Georganiseerd rond bedrijfsfunctionaliteiten}
+
+Grote applicaties worden vaak onderverdeelt in een UI-team, server-side team en een databank team. Deze aanpak kan immers leiden tot inefficiënties. Wanneer eenvoudige wijzigingen doorgevoerd moeten worden vereist dit samenwerking tussen meedere teams, dit kost tijd en geld.
+
+De microservices-architectuur onderscheidt zich hier van door een applicatie te splitsen op basis van bedrijfsfunctionaliteiten. Elke microservice is een volledig pakket van user interface, persistentie en externe samenwerkingen.
+
+\subsubsection{Producten geen projecten}
+
+Microservices-architectuur richten zich op een productgerichte aanpak. Dit wil zeggen dat ontwikkelingteams ook na het afleveren van software instaan voor de ondersteuning indien de klant problemen ondervindt of tekortkomingen opmerkt.
+
+\subsubsection{Slimme eindpunten en domme leidingen}
+
+Bij het ontwerpen van een communicatie structuur tussen services wordt vaak gekeken naar een systeem zoals een Enterprise Service Bus (ESB). Deze aanpak brengt heel wat complexiteit met zich mee. Meer details over de werking van ESB is terug te vinden in de sectie \hyperref[sec:soa]{Service-oriented architecture}
+
+\subsubsection{Gedecentraliseerd beheer}
+
+Monolitische applicaties zijn vaak gebasseerd op een gecentraliseerd systeem. Hierdoor zijn ontwikkelingteams vaak beperkt tot 1 specifieke tech stack voor de gehele applicatie.
+
+Microservices bieden daarentegen meer keuzevrijheid. Doordat elke service los staat van de andere kan deze gebouwd worden met de technologieën die het meest geschikt zijn voor de specifieke service. De ene service kan gebruikmaken van Node.js terwijl een andere C++ gebruikt.
+
+\subsubsection{Gedecentraliseerd gegevensbeheer}
+
+Monolitische applicaties gebruiken grotendeels één databank. Microservices gebruiken een aanpak genaamd Polyglot Persistence. Polyglot Persistence heeft betrekking op het feit dat middelgrote tot grote ondernemingen verschillende gegevensopslagtechnologieën gebruiken om al de diverse types van data op te slaan \autocite{Fowler2011}.
+
+\subsubsection{Automatisering van de infrastructuur}
+
+Ontwikkelingen zoals de cloud and AWS hebben de complexiteit in verband met het bouwen, uitrollen en uitvoeren van microservices aanzienlijk verminderd. Ontwikkelingteams die ervaring hebben met Continuous Delivery en Continuous Integration gebruiken al op regelmatige basis infrastructuur automatiserende technieken.
+
+\subsubsection{Ontwerp voor mislukking}
+
+Een microservices-architectuur moet ontworpen worden zodat wanneer een service uitvalt de gehele applicatie niet crasht. Wanneer een verzoek naar een service faalt, dan moet er op een soepele manier mee omgegaan worden.
+
+Hierdoor is monitoring van de aparte services een belangrijk proces bij het ontwikkelen van deze architectuur.
+
+\subsubsection{Evolutionair ontwerp}
+
+Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden indien er wijzigingen zijn aangebrancht. Dit resulteert in een simpel en snel proces om software te leveren. Hierbij moet wel rekeninggehouden worden met andere services die afhankelijk zijn van de gewijzigde service.
+
+\subsection{Service-oriented architecture}
+\label{sec:soa}
+
+\subsection{Distributed Systems}
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
