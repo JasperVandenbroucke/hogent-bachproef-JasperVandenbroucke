@@ -19,7 +19,7 @@ Kleine ondernemingen kunnen hun online diensten aanbieden op een simpele, monoli
 
 De ontwikkelaars bij het stagebedrijf Fabrimode nv kwamen met de vraag of het overschakelen van een monolitische architectuur naar een microservices-architectuur nu echt de prestaties van de applicatie verbeteren. Deze bachelorproef zal dan ook vertrekken van deze casus en zal focussen op de schaalbaarheid en complexiteit bij een microservices-architectuur.
 
-De onderzoeksvraag luidt als volgt: Welke impact heeft een microservices-architectuur op de schaalbaarheid en complexiteit op een webapplicatie?
+De onderzoeksvraag luidt als volgt: Welke impact heeft een microservices-architectuur op de schaalbaarheid en \hl{ontwikkelingscomplexiteit} op een webapplicatie?
 
 De volgende deelvragen zullen bijdragen tot de conclusie van deze bachelorproef:
 \begin{itemize}
@@ -42,7 +42,7 @@ Allereerst wordt er gekeken naar wat een monolitische architectuur juist is. Vol
 
 \textcite{Blinowski2022} verduidelijken de functie van elk van deze lagen. In de presentatie laag wordt er voornamelijk functionaliteit geplaatst die het voor de gebruiker mogelijk maakt om met de applicatie te interageren. Vervolgens wordt de domein laag gebruikt om te reageren om verzoeken van de gebruiker. Dit kan gaan van het uitvoeren van bepaalde domein logica tot het ophalen van data uit een databron.
 
-Monolitische applicaties kunnen succesvol zijn, maar meer mensen ondervinden begrensingen aan deze architectuur \autocite{Lewis2014}. Vooral omdat de vraag naar applicaties die in de cloud worden uitgerold stijgt. Wanneer wijzigingen moeten doorgevoerd worden aan een klein onderdeel van de monolitische architectuur vereist dit dat de volledige applicatie opnieuw gebouwd en uitgerold moet worden. Dit kan leiden tot een slechte structuur van de applicatie. Daarnaast benadrukken \textcite{Lewis2014} het feit dat bij het schalen van een monolitische applicatie de volledige applicatie moet geschaald, in plaats van slechts een specifiek onderdeel.
+Monolitische applicaties kunnen succesvol zijn, maar meer mensen ondervinden \hl{begrenzingen} aan deze architectuur \autocite{Lewis2014}. Vooral omdat de vraag naar applicaties die in de cloud worden uitgerold stijgt. Wanneer wijzigingen moeten doorgevoerd worden aan een klein onderdeel van de monolitische architectuur vereist dit dat de volledige applicatie opnieuw gebouwd en uitgerold moet worden. Dit kan leiden tot een slechte structuur van de applicatie. Daarnaast benadrukken \textcite{Lewis2014} het feit dat bij het schalen van een monolitische applicatie de volledige applicatie \hl{geschaald moet worden}, in plaats van slechts een specifiek onderdeel.
 
 \subsection{Microservices-architectuur}
 
@@ -56,13 +56,13 @@ De microservices-architectuur is een software architectuur waarbij één enkele 
 
 \subsubsection{Services opdelen in componenten}
 
-In de software industrie is er al lang een wens om systemen te bouwen doormiddel van componenten samen te voegen, zoals in de reële wereld. De microservices-architectuur gebruikt zijn aparte services als componeneten.
+In de software industrie is er al lang een wens om systemen te bouwen doormiddel van componenten samen te voegen, zoals in de reële wereld. De microservices-architectuur gebruikt zijn aparte services als \hl{componenten}.
 
 Componenten worden gezien als stukjes software die onafhankelijk vervangbaar en uitbreidbaar zijn.
 
 \subsubsection{Georganiseerd rond bedrijfsfunctionaliteiten}
 
-Grote applicaties worden vaak onderverdeelt in een UI-team, server-side team en een databank team. Deze aanpak kan immers leiden tot inefficiënties. Wanneer eenvoudige wijzigingen doorgevoerd moeten worden vereist dit samenwerking tussen meedere teams, dit kost tijd en geld.
+\hl{Grote applicaties worden vaak tijdens het ontwikkelingsproces onderverdeeld in een UI-team, server-side team en een databankteam.} Deze aanpak kan immers leiden tot inefficiënties. Wanneer eenvoudige wijzigingen doorgevoerd moeten worden vereist dit samenwerking tussen meedere teams, dit kost tijd en geld.
 
 De microservices-architectuur onderscheidt zich hier van door een applicatie te splitsen op basis van bedrijfsfunctionaliteiten. Elke microservice is een volledig pakket van user interface, persistentie en externe samenwerkingen.
 
@@ -70,13 +70,13 @@ De microservices-architectuur onderscheidt zich hier van door een applicatie te 
 
 Microservices-architectuur richten zich op een productgerichte aanpak. Dit wil zeggen dat ontwikkelingteams ook na het afleveren van software instaan voor de ondersteuning indien de klant problemen ondervindt of tekortkomingen opmerkt.
 
-\subsubsection{Slimme eindpunten en domme leidingen}
+\subsubsection{Intelligente services en eenvoudige communicatie}
 
 Bij het ontwerpen van een communicatie structuur tussen services wordt vaak gekeken naar een systeem zoals een Enterprise Service Bus (ESB). Deze aanpak brengt heel wat complexiteit met zich mee. Meer details over de werking van ESB is terug te vinden in de sectie \hyperref[sec:soa]{Service-oriented architecture}
 
 \subsubsection{Gedecentraliseerd beheer}
 
-Monolitische applicaties zijn vaak gebasseerd op een gecentraliseerd systeem. Hierdoor zijn ontwikkelingteams vaak beperkt tot 1 specifieke tech stack voor de gehele applicatie.
+Monolitische applicaties zijn vaak \hl{gebaseerd} op een gecentraliseerd systeem. Hierdoor zijn ontwikkelingteams vaak beperkt tot 1 specifieke tech stack voor de gehele applicatie.
 
 Microservices bieden daarentegen meer keuzevrijheid. Doordat elke service los staat van de andere kan deze gebouwd worden met de technologieën die het meest geschikt zijn voor de specifieke service. De ene service kan gebruikmaken van Node.js terwijl een andere C++ gebruikt.
 
@@ -86,17 +86,17 @@ Monolitische applicaties gebruiken grotendeels één databank. Microservices geb
 
 \subsubsection{Automatisering van de infrastructuur}
 
-Ontwikkelingen zoals de cloud and AWS hebben de complexiteit in verband met het bouwen, uitrollen en uitvoeren van microservices aanzienlijk verminderd. Ontwikkelingteams die ervaring hebben met Continuous Delivery en Continuous Integration gebruiken al op regelmatige basis infrastructuur automatiserende technieken.
+Ontwikkelingen zoals de \hl{Cloud en Amazon Web Services (AWS)} hebben de complexiteit in verband met het bouwen, uitrollen en uitvoeren van microservices aanzienlijk verminderd. Ontwikkelingteams die ervaring hebben met Continuous Delivery en Continuous Integration gebruiken al op regelmatige basis infrastructuur automatiserende technieken.
 
 \subsubsection{Ontwerp voor mislukking}
 
-Een microservices-architectuur moet ontworpen worden zodat wanneer een service uitvalt de gehele applicatie niet crasht. Wanneer een verzoek naar een service faalt, dan moet er op een soepele manier mee omgegaan worden.
+Een microservices-architectuur moet ontworpen worden zodat wanneer een service uitvalt de gehele applicatie niet crasht. Wanneer een verzoek naar een service faalt, \hl{dan moet de fout ontdekt kunnen worden en, indien mogelijk, moet de specifieke service automatisch herstelt worden}.
 
 Hierdoor is monitoring van de aparte services een belangrijk proces bij het ontwikkelen van deze architectuur.
 
 \subsubsection{Evolutionair ontwerp}
 
-Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden indien er wijzigingen zijn aangebrancht. Dit resulteert in een simpel en snel proces om software te leveren. Hierbij moet wel rekeninggehouden worden met andere services die afhankelijk zijn van de gewijzigde service.
+Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden indien er wijzigingen zijn \hl{aangebracht}. Dit resulteert in een simpel en snel proces om software te leveren. Hierbij moet wel rekeninggehouden worden met andere services die afhankelijk zijn van de gewijzigde service.
 
 \subsection{Service-oriented architecture}
 \label{sec:soa}
@@ -117,11 +117,11 @@ Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden i
 
 In de initiële fase van het onderzoek zal er een uitgebreide literatuurstudie worden uitgevoerd. De bedoeling van deze fase is om inzicht te krijgen in het onderwerp en het probleemdomein van deze bachelorproef.
 
-In een volgende fase zal er onderzoek worden gedaan naar de meest toepasselijke programmeertalen en frameworks om een proof-of-concept (PoC) uit te werken. Hierbij wordt er ook aandacht gezonken aan containerisatietools, namelijk Docker en Kubernetes, die het mogelijk maken om microservices onafhankelijk te ontwikkelen, testen en te beheren.
+In een volgende fase zal er onderzoek worden gedaan naar de meest toepasselijke programmeertalen en frameworks om een proof-of-concept (PoC) uit te werken. Hierbij wordt er ook aandacht \hl{geschonken} aan containerisatietools, namelijk Docker en Kubernetes, die het mogelijk maken om microservices onafhankelijk te ontwikkelen, testen en te beheren.
 
-In de derde fase van het onderzoek wordt een effectieve PoC uitgewerkt. Voor deze PoC wordt er beroep gedaan op de technologieën die het best uit literatuurstudie naar voorkomen. In een eerste stap van het uitwerken van deze PoC, zal een monolitische e-commerce webapplicatie gebouwd worden. In een volgende stap wordt diezelfde webapplicatie omgezet naar een microservices webapplicatie. Hierbij zal er rekeninggehouden worden met de best-practices voor het ontwerpen van een microservices-architectuur.
+In de derde fase van het onderzoek wordt een effectieve PoC uitgewerkt. Voor deze PoC wordt er beroep gedaan op de technologieën die het best uit literatuurstudie naar voorkomen. In een eerste stap, zal een monolitische e-commerce webapplicatie gebouwd worden. In een volgende stap wordt diezelfde webapplicatie omgezet naar een microservices webapplicatie. Hierbij zal er rekeninggehouden worden met de best-practices voor het ontwerpen van een microservices-architectuur.
 
-In de daaropvolgende fase zullen de schaalbaarheid en de complexiteit van beide webapplicaties getest worden. Voor de schaarbaarheidstesten zal er gebruik gemaakt worden van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestanties onder intesief gebruik van de beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld. Hiervoor zal de focus gelegd worden op de ontwikkelings- en onderhoudscomplexiteit van beide applicaties.
+In de daaropvolgende fase zullen de schaalbaarheid en de complexiteit van beide webapplicaties getest worden. Voor de schaarbaarheidstesten zal er gebruik gemaakt worden van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de \hl{prestaties} onder \hl{intensief} gebruik van de beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld. Hiervoor zal de focus gelegd worden op de ontwikkelings- en onderhoudscomplexiteit van beide applicaties.
 
 Tot slot zullen de resultaten van de Apache JMeter testen en de complexiteitsbeoordeling van beide webapplicaties worden geanalyseerd om conclusies te trekken over de schaalbaarheid en complexiteit van de microservices-architectuur ten opzichte van de monolitische aanpak.
 
