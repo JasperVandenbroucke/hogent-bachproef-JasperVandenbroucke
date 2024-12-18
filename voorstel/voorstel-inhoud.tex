@@ -101,6 +101,16 @@ Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden i
 \subsection{Service-oriented architecture}
 \label{sec:soa}
 
+Volgens \textcite{Rojas2021} wordt een service-oriented architectuur (SOA) gedefinieerd als een architectuurstijl dat is ontworpen voor het creëren van een losse verbinding tussen systemen. De SOA stijl bestaat uit serviceproviders en -consumenten die met elkaar samenwerken via een vooraf overeengekomen interface. 
+
+De afgelopen jaren heeft de service-oriented architectuur steeds meer aandacht gekregen \autocite{Niknejad2020}. Het migreren naar SOA systemen is een trend geworden om software-omgevingen te moderniseren. SOA biedt voordelen voor technologieën zoals het Internet of Things (IoT), Cloud Computing (CC) en microservices, door flexibele integratie en herbruikbare services.
+
+Ondanks dat zowel de microservices architectuur als SOA gebruikmaken van services, verschillende de communicatiestructuren tussen de services van beide architecturen \autocite{Blinowski2022}. Bij SOA is de communicatie vaak gebaseerd op een mechanisme zoals de Enterprise Service Bus (ESB), die functionaliteiten biedt als berichtroutering en filtering. Het gebruik van een ESB is vaak "zwaar" en complex.
+
+Microservices daarentegen zorgen ervoor dat de communicatiestructuur van de services eenvoudiger is \autocite{Blinowski2022}. De services van een microservices architectuur maken gebruik van standaard internetprotocollen zoals Hypertext Transfer Protocol (HTTP) en Representational State Transfer (REST), daarnaast kan er ook gebruikgemaakt worden van protocollen zoals Java Message Service (JMS) of Advanced Message Queuing Protocol (AMQP) voor berichtenverkeer.
+
+\subsubsection{Enterprise Service Bus}
+
 \subsection{Distributed Systems}
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
@@ -119,7 +129,7 @@ In de initiële fase van het onderzoek zal er een uitgebreide literatuurstudie w
 
 In een volgende fase zal er onderzoek worden gedaan naar de meest toepasselijke programmeertalen en frameworks om een proof-of-concept (PoC) uit te werken. Hierbij wordt er ook aandacht geschonken aan containerisatietools, namelijk Docker en Kubernetes, die het mogelijk maken om microservices onafhankelijk te ontwikkelen, testen en te beheren.
 
-In de derde fase van het onderzoek wordt een effectieve PoC uitgewerkt. Voor deze PoC wordt er beroep gedaan op de technologieën die het best uit literatuurstudie naar voorkomen. In een eerste stap, zal een monolitische e-commerce webapplicatie gebouwd worden. In een volgende stap wordt diezelfde webapplicatie omgezet naar een microservices webapplicatie. Hierbij zal er rekeninggehouden worden met de best-practices voor het ontwerpen van een microservices-architectuur.
+In de derde fase van het onderzoek wordt een effectieve PoC uitgewerkt. Voor deze PoC wordt er beroep gedaan op de technologieën die het best uit literatuurstudie naar voorkomen. In een eerste stap, zal een monolitische e-commerce webapplicatie gebouwd worden. In een volgende stap wordt diezelfde webapplicatie omgezet naar een applicatie met een microservices-architectuur. Hierbij zal er rekeninggehouden worden met de best-practices voor het ontwerpen van een microservices-architectuur.
 
 In de daaropvolgende fase zullen de schaalbaarheid en de complexiteit van beide webapplicaties getest worden. Voor de schaarbaarheidstesten zal er gebruik gemaakt worden van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestaties onder intensief gebruik van de beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld. Hiervoor zal de focus gelegd worden op de ontwikkelings- en onderhoudscomplexiteit van beide applicaties.
 
