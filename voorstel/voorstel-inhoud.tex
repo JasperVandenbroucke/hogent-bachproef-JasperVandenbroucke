@@ -48,7 +48,7 @@ Monolitische applicaties kunnen succesvol zijn, maar meer mensen ondervinden beg
 
 \textcite{Thoenes2015} beschrijft een microservice als een kleine applicatie met één enkele verantwoordelijkheid, die individueel uigerold, geschaald en getest kan worden. Het feit dat een microservice slechts één verantwoordelijkheid heeft kan in twee opzichten bekeken worden \autocite{Thoenes2015}. Ten eerste houdt dit in dat een microservice slechts één reden heeft om te worden gewijzigd of vervangen. En ten tweede betekent deze verantwoordelijkheid dat een microservice slechts één taak uitvoert, die ook nog eens eenduidig is.
 
-De microservices-architectuur is een software architectuur waarbij één enkele applicatie wordt gebouwd die bestaat uit verschillende, kleinere microservices \autocite{Lewis2014}. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). 
+De microservices-architectuur is een software architectuur waarbij één enkele applicatie wordt gebouwd die bestaat uit verschillende, kleinere microservices \autocite{Lewis2014}. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). Binnen deze stijl wordt een \hyperref[sec:dissys]{distributed system} opgedeeld in een verzameling van samenhangende, maar zelfstandige services \autocite{Limon2018}.
 
 \subsection{Kenmerken van microservices-\-architectuur}
 
@@ -116,6 +116,13 @@ De Enterprise Service Bus (ESB) heeft volgens \textcite{Aziz2020} de afgelopen j
 Het gebruik van een ESB in een service-oriented architectuur zorgt er voor dat de verschillende services zeer strikt gekoppeld zijn met de middleware en dat de ESB een "single point of failure" wordt \autocite{Raj2021}.
 
 \subsection{Distributed Systems}
+\label{sec:dissys}
+
+Volgens \textcite{Steen2018} worden distributed systems gedefinieerd als een verzameling van autonome computationele elementen die voor gebruikers als één samenhangend systeem lijkt te functioneren.
+
+Deze definitie benadrukt twee kenmerken van distributed systems \autocite{Steen2018}. Het eerste kenmerk is dat een distributed systems bestaat uit een verzameling computationele elementen die onafhankelijk van elkaar kunnen functioneren. Deze computationele elementen kunnen zowel hardware-apparaten als softwareprocessen zijn. Het tweede kenmerk is dat gebruikers, zowel mensen als applicaties, de indruk hebben dat ze met één samenhangend systeem te maken hebben. Dit benadrukt dat de elementen op de een of andere manier moeten samenwerken. Hoe deze samenwerking tot stand komt is de kern van distributed systems.
+
+Distributed systems zijn de afgelopen twee decennia in trek door de groeiende vraag naar onafhankelijke ontwikkeling en implementatie van webapplicaties \autocite{Raj2021}. Dit soort systemen worden essentieel voor het snel leveren van diensten met behulp van continuous integration en continuous development (CI/CD). Eén van de basisarchitecturen van distributed systems is SOA, hierbij staan services centraal in het ontwerp.
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
