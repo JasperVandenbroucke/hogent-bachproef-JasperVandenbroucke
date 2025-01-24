@@ -53,51 +53,55 @@ De microservices-architectuur is een software architectuur waarbij één enkele 
 
 \subsection{Kenmerken van microservices-\-architectuur}
 
-\textcite{Lewis2014} identificeren 9 kenmerken van de microservices-architectuur:
+\textcite{Bakshi2017} identificeert 8 kenmerken van de microservices-architectuur:
 
 \subsubsection{Services opdelen in componenten}
 
-In de software industrie is er al lang een wens om systemen te bouwen doormiddel van componenten samen te voegen, zoals in de reële wereld. De microservices-architectuur gebruikt zijn aparte services als componenten.
+Microservices maken gebruik van componenten die onafhankelijk vervangbaar en uitbreidbaar zijn. Deze componenten/services communiceren via mechanismen zoals webservices of remote procedure calls (RPC).
 
-Componenten worden gezien als stukjes software die onafhankelijk vervangbaar en uitbreidbaar zijn.
+Het grootste voordeel bij het werken met aparte componenten/services is dat deze services onafhankelijk kunnen ingezet kunnen worden. Waardoor, indien nodig, wijzigingen aan de ene service kunnen aangebracht worden zonder de andere te beïnvloeden.
 
 \subsubsection{Georganiseerd rond bedrijfsfunctionaliteiten}
 
-Grote applicaties worden vaak tijdens het ontwikkelingsproces onderverdeeld in een UI-team, server-side team en een databankteam. Deze aanpak kan immers leiden tot inefficiënties. Wanneer eenvoudige wijzigingen doorgevoerd moeten worden vereist dit samenwerking tussen meedere teams, dit kost tijd en geld.
+Microservices worden ontworpen met een focus op bedrijfsfunctionaliteiten. Hierbij moet gekeken worden naar een brede implementatie van software voor een specifiek bedrijfsdomein, dit omvat een gebruikersinterface, persistente opslag en externe samenwerkingen.
 
-De microservices-architectuur onderscheidt zich hier van door een applicatie te splitsen op basis van bedrijfsfunctionaliteiten. Elke microservice is een volledig pakket van user interface, persistentie en externe samenwerkingen.
+Dit resulteert in cross-functionele teams, waarbij skills m.b.t. gebruikservaring, databanken en projectmanagement essentieel zijn.
 
-\subsubsection{Producten geen projecten}
+\subsubsection{Gebruik van Continuous Integration/Continuous Deployment (CI/CD)}
 
-Microservices-architectuur richten zich op een productgerichte aanpak. Dit wil zeggen dat ontwikkelingteams ook na het afleveren van software instaan voor de ondersteuning indien de klant problemen ondervindt of tekortkomingen opmerkt.
+Applicatieontwikkeling met microservices maakt gebruik van het CI/CD proces, waarbij software voortdurend wordt ontwikkeld en functies worden toegevoegd. Dit proces omvat een ontwikkel-, test-, staging- en productieomgeving.
+
+De monolitische aanpak legt voornamelijk de focus op het afleveren van compleet afgewerkte software. Deze software wordt overgedragen aan de klant en het projectteam gaat over naar een nieuw project.
 
 \subsubsection{Intelligente services en eenvoudige communicatie}
 
-Bij het ontwerpen van een communicatie structuur tussen services wordt vaak gekeken naar een systeem zoals een Enterprise Service Bus (ESB). Deze aanpak brengt heel wat complexiteit met zich mee. Meer details over de werking van ESB is terug te vinden in de sectie \hyperref[sec:soa]{Service-oriented architecture}
+Traditioneel wordt er voor communicatiesysteem gekeken naar een Enterprise Service Bus (ESB). Deze aanpak brengt echter heel wat complexiteit met zich mee. Meer details over de werking van een ESB is terug te vinden in de sectie \hyperref[sec:soa]{Service-oriented architecture}.
 
-\subsubsection{Gedecentraliseerd beheer}
-
-Monolitische applicaties zijn vaak gebaseerd op een gecentraliseerd systeem. Hierdoor zijn ontwikkelingteams vaak beperkt tot 1 specifieke tech stack voor de gehele applicatie.
-
-Microservices bieden daarentegen meer keuzevrijheid. Doordat elke service los staat van de andere kan deze gebouwd worden met de technologieën die het meest geschikt zijn voor de specifieke service. De ene service kan gebruikmaken van Node.js terwijl een andere C++ gebruikt.
-
-\subsubsection{Gedecentraliseerd gegevensbeheer}
-
-Monolitische applicaties gebruiken grotendeels één databank. Microservices gebruiken een aanpak genaamd Polyglot Persistence. Polyglot Persistence heeft betrekking op het feit dat middelgrote tot grote ondernemingen verschillende gegevensopslagtechnologieën gebruiken om al de diverse types van data op te slaan \autocite{Fowler2011}.
+Microservices daarentegen gebruiken communicatieprotocollen zoals Representational State Transfer (REST). Hierdoor bevindt de logica zich in de services (smart endpoints) en gebeurt de communicatie op een eenvoudige manier (dumb pipes).
 
 \subsubsection{Automatisering van de infrastructuur}
 
-Ontwikkelingen zoals de Cloud en Amazon Web Services (AWS) hebben de complexiteit in verband met het bouwen, uitrollen en uitvoeren van microservices aanzienlijk verminderd. Ontwikkelingteams die ervaring hebben met Continuous Delivery en Continuous Integration gebruiken al op regelmatige basis infrastructuur automatiserende technieken.
+De automatisering van infrastructuur is essentieel, bijvoorbeeld om automatisch implementaties te realiseren in diverse omgevingen en microservices te beheren in productie.
 
-\subsubsection{Ontwerp voor mislukking}
+\subsubsection{Fouttolerantie en monitoring}
 
-Een microservices-architectuur moet ontworpen worden zodat wanneer een service uitvalt de gehele applicatie niet crasht. Wanneer een verzoek naar een service faalt, dan moet de fout ontdekt kunnen worden en, indien mogelijk, moet de specifieke service automatisch herstelt worden.
+Een microservices-architectuur moet ontworpen worden zodat wanneer een individuele service uitvalt de applicatie als geheel niet faalt.
 
-Hierdoor is monitoring van de aparte services een belangrijk proces bij het ontwikkelen van deze architectuur.
+Real-time monitoring speelt hierin een cruciale rol.
 
-\subsubsection{Evolutionair ontwerp}
+\subsubsection{Decentralisatie van logica en data}
 
-Met microservices moeten enkel de gewijzigde services opnieuw uitgerold worden indien er wijzigingen zijn aangebracht. Dit resulteert in een simpel en snel proces om software te leveren. Hierbij moet wel rekeninggehouden worden met andere services die afhankelijk zijn van de gewijzigde service.
+Eerder werd al vermeld dat de microservices-architectuur werkt met onafhankelijke services die elk hun verantwoordelijkheid hebben. Een belangrijk hulpmiddel bij het maken van services is het Domain Driven Design (DDD) principe. 
+
+Binnen DDD wordt een complex domein opgesplitst in kleinere contexten, die elk een eigen verantwoordelijkheid hebben. Deze contexten werken samen, maar zijn onafhankelijk van elkaar.
+
+Daarnaast decentraliseert een microservices-architectuur de manier waarop data wordt opgeslagen en beheert. Monolitische applicaties gebruiken grotendeels één databank. Microservices opteren om elke services zijn eigen databank te laten beheren. Deze aanpak wordt ook wel Polyglot Persistence genoemd.
+
+Bij Polyglot Persistence worden verschillende databanksystemen gebruikt in één applicatie \autocite{RoyHubara2022}.
+
+\subsubsection{Flexibiliteit in technologiekeuze}
+
+Doordat services onafhankelijk zijn, kunnen deze ontwikkeld worden met de meest geschikte programmeertaal of technologie, zoals Node.js, Python, Java of C++.
 
 \subsection{Service-oriented architecture}
 \label{sec:soa}
