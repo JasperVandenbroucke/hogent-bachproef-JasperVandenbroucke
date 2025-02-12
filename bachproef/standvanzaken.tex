@@ -1,11 +1,22 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
 \label{ch:stand-van-zaken}
 
-In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Vervolgens worden enkele relevante termen uitgereider behandelt die de werking en structuur van microservices definiëren. Tot slot zal er gekeken worden naar de nodige tools om microservices te ontwikkelen en beheren.
+In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Tot slot worden enkele relevante termen uitgebreider behandelt die de werking en structuur van microservices definiëren.
 
 \section{Wat is een monolithische architectuur?}
 
+De monolithische architectuur is door de jaren heen een succesvolle keuze geweest voor softwareontwikkelaars \autocite{Gos2020}. Bij deze aanpak van software ontwikkeling bestaat een applicatie uit verscheidene componenten. Voorbeelden van componenten zijn authenticatie en authorizatie, productbeheer, klantenbeheer enz. Deze componenten bevinden zich in een monolithische architectuur dan in één en hetzelfde programma.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{MonolithischeArchitectuur.png}
+  \caption[Voorstelling van een monolitische architectuur]{\label{fig:monolithische architectuur}Voorbeeld van een monolithische architectuur. Deze afbeelding toont de architectuur van een applicatie die de bedrijfslogica voor een e-commerce demonstreert \autocite{Gos2020}.}
+\end{figure}
+
+De bovenstaande afbeelding (Figuur \ref{fig:monolithische architectuur}) verduidelijkt de werking van een monolithische applicatie. In deze representatie zien we een EStoreUI component die fungeert als de grafische interface waarmee gebruiker kunnen interageren. Daaronder zijn 3 services gedefiniëerd, namelijk de Catalog Service, Order Service en Payment Service. Elk van deze 3 services is verantwoordelijk voor een specifiek bedrijfsproces. Vervolgens zijn alle services verbonden met eenzelfde relationele database (RDBMS). 
+
 \section{Wat is een microservices-architectuur?}
+
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
