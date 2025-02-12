@@ -418,7 +418,7 @@
 
     % Use a unicode-compliant sans serif math font
     \IfFontExistsTF{Fira Math Regular}{%
-        \setmathfont{Fira Math Regular}[BoldFont=Fira Math Bold]
+        \setmathfont{Fira Math Regular}[BoldFont=FiraMath-Bold]
         \setmathfont{Fira Math Regular}[FakeSlant, range={bfit->it}]
     }{%
         \setmathfont{FiraMath-Regular.otf}[
