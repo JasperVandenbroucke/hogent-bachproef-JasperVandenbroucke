@@ -9,11 +9,21 @@ De monolithische architectuur is door de jaren heen een succesvolle keuze gewees
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{MonolithischeArchitectuur.png}
+  \includegraphics[width=0.65\textwidth]{MonolithischeArchitectuur.png}
   \caption[Voorstelling van een monolitische architectuur]{\label{fig:monolithische architectuur}Voorbeeld van een monolithische architectuur. Deze afbeelding toont de architectuur van een applicatie die de bedrijfslogica voor een e-commerce demonstreert \autocite{Gos2020}.}
 \end{figure}
 
-De bovenstaande afbeelding (Figuur \ref{fig:monolithische architectuur}) verduidelijkt de werking van een monolithische applicatie. In deze representatie zien we een EStoreUI component die fungeert als de grafische interface waarmee gebruiker kunnen interageren. Daaronder zijn 3 services gedefiniëerd, namelijk de Catalog Service, Order Service en Payment Service. Elk van deze 3 services is verantwoordelijk voor een specifiek bedrijfsproces. Vervolgens zijn alle services verbonden met eenzelfde relationele database (RDBMS). 
+De bovenstaande afbeelding (Figuur \ref{fig:monolithische architectuur}) verduidelijkt de interne structuur van een monolithische applicatie. In deze representatie zien we een EStoreUI component die fungeert als de grafische interface waarmee gebruikers kunnen interageren met de applicatie. Daaronder zijn 3 services gedefiniëerd, namelijk de Catalog Service, Order Service en Payment Service. Elk van deze 3 services is verantwoordelijk voor het respectievelijke bedrijfsproces. Tot slot zijn alle services verbonden met eenzelfde relationele database (RDBMS). Deze verschillende componenten bevinden zich in een monolithische architectuur dan ook binnen dezelfde applicatie.\newline
+
+Een kenmerkend aspect van een monolithische applicatie is de gelaagde structuur, waarbij de grafische interface bovenop verschillende services is opgebouwd en waar er slechts 1 databank is die gedeeld wordt door alle services \autocite{Velepucha2023}. Deze architectuur staat ook beter bekend als het 3-lagenmodel, waarbij de opbouw van een applicatie wordt opgedeeld in diverse lagen. De volgende lagen kunnen geïdentificeerd worden:
+
+\begin{itemize}
+	\item \textbf{Presentatielaag}: binnen deze laag vinden we de code die het mogelijk maakt voor gebruikers om met de applicatie te interageren.
+	\item \textbf{Business laag}: deze laag is specifiek ontworpen met het oog op het implementeren van bedrijfsfunctionaliteit en validatie.
+	\item \textbf{Datalaag}: hierin worden alle interacties met de dataopslag gedefinieerd alsook de interacties met externe services die nodig zijn voor de applicatie.
+\end{itemize}
+
+De monolithische architectuur brengt een aantal voordelen met zich mee, zoals eenvoudige implementatie en gemakkelijke testbaarheid \autocite{Li2022}. Toch zijn er ook een aantal mindere aspecten aan deze software architectuur, voornamelijk wanneer de applicatie dient te groeien. Naarmate bedrijven groeien en hun software uitbreiden, kan de toenemende grote van de codebase leiden tot verschillende problemen \autocite{Wei2025}. Wijzigingen in de functionaliteiten of bugfixes kunnen bijvoorbeeld onverwachte gevolgen hebben voor de gehele applicatie. Daarnaast heeft de forse opkomst van cloud computing de voordelen van een monolithische architectuur aanzienlijk verminderd. Cloud-gebaseerde oplossingen vereisen vaak schaalbaarheid en flexibiliteit. Deze 2 factoren sluiten minder goed aan bij de klassieke, monolithische applicatie. Deze evolutie heeft dan volgens \textcite{Wei2025} geleid tot een toenemende interesse in microservices.
 
 \section{Wat is een microservices-architectuur?}
 
