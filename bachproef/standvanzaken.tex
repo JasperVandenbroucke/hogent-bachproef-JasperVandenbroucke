@@ -1,7 +1,7 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
 \label{ch:stand-van-zaken}
 
-In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Tot slot worden enkele relevante termen uitgebreider behandelt die de werking en structuur van microservices definiëren.
+In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Tot slot worden enkele relevante termen uitgebreider behandelt die de werking en structuur van microservices definiëren. Op basis van de informatie uit dit hoofdstuk zal duidelijk worden wat er allemaal komt kijken tijdens het ontwerpen van een proof-of-concept (PoC) in een later deel van de bachelorproef.
 
 \section{Wat is een monolithische architectuur?}
 
@@ -9,7 +9,7 @@ De monolithische architectuur is door de jaren heen een succesvolle keuze gewees
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.65\textwidth]{MonolithischeArchitectuur.png}
+  \includegraphics[width=0.8\textwidth]{MonolithischeArchitectuur.png}
   \caption[Voorstelling van een monolitische architectuur]{\label{fig:monolithische architectuur}Voorbeeld van een monolithische architectuur. Deze afbeelding toont de architectuur van een applicatie die de bedrijfslogica voor een e-commerce demonstreert \autocite{Gos2020}.}
 \end{figure}
 
@@ -23,10 +23,26 @@ Een kenmerkend aspect van een monolithische applicatie is de gelaagde structuur,
 	\item \textbf{Datalaag}: hierin worden alle interacties met de dataopslag gedefinieerd alsook de interacties met externe services die nodig zijn voor de applicatie.
 \end{itemize}
 
-De monolithische architectuur brengt een aantal voordelen met zich mee, zoals eenvoudige implementatie en gemakkelijke testbaarheid \autocite{Li2022}. Toch zijn er ook een aantal mindere aspecten aan deze software architectuur, voornamelijk wanneer de applicatie dient te groeien. Naarmate bedrijven groeien en hun software uitbreiden, kan de toenemende grote van de codebase leiden tot verschillende problemen \autocite{Wei2025}. Wijzigingen in de functionaliteiten of bugfixes kunnen bijvoorbeeld onverwachte gevolgen hebben voor de gehele applicatie. Daarnaast heeft de forse opkomst van cloud computing de voordelen van een monolithische architectuur aanzienlijk verminderd. Cloud-gebaseerde oplossingen vereisen vaak schaalbaarheid en flexibiliteit. Deze 2 factoren sluiten minder goed aan bij de klassieke, monolithische applicatie. Deze evolutie heeft dan volgens \textcite{Wei2025} geleid tot een toenemende interesse in microservices.
+De monolithische architectuur brengt een aantal voordelen met zich mee, zoals eenvoudige implementatie en gemakkelijke testbaarheid \autocite{Li2022}. Toch zijn er ook een aantal mindere aspecten aan deze software architectuur, voornamelijk wanneer de applicatie dient te groeien. Naarmate bedrijven groeien en hun software uitbreiden, kan de toenemende grote van de codebase leiden tot verschillende problemen \autocite{Wei2025}. Wijzigingen in de functionaliteiten of bugfixes kunnen bijvoorbeeld onverwachte gevolgen hebben voor de gehele applicatie. Daarnaast heeft de sterke opkomst van cloud computing de voordelen van een monolithische architectuur opmerkelijk verminderd. Cloud-gebaseerde oplossingen vereisen vaak schaalbaarheid en flexibiliteit. Deze 2 factoren sluiten minder goed aan bij de klassieke, monolithische applicatie. Volgens \textcite{Wei2025} heeft deze evolutie dan ook geleid tot een toenemende interesse in microservices.
 
 \section{Wat is een microservices-architectuur?}
 
+Succesvolle softwaresystemen groeien in de loop van de tijd vaak in omvang en complexiteit \autocite{Abgaz2023}. Dit door de toevoeging van verschillende functionaliteiten, wat kan resulteren in sterk gekoppelde, maar toch minder samenhangende componenten. Als gevolg hiervan hebben monolithische applicaties vaak beperkingen op het gebied van schaalbaarheid, onderhoud en prestaties. In de huidige bedrijfsomgevingen is de nood om schaalbare applicaties te ontwikkelen essentieel, wegens de opkomst van nieuwe technologieën en de vraag om zowel menselijke als technologische middelen te optimaliseren \autocite{Nayim2023}.\newline
+
+Een van de allereersten die een definitie voor microservices gaven waren \textcite{Lewis2014}. Zij beschreven in hun blogpost de microservices-architectuur als een software architectuur waarbij één enkele applicatie bestaat uit verschillende, kleinere services. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). Wanneer we dan kijken naar een recentere beschrijving van dit concept, dan benadrukken \textcite{Velepucha2023} dat de microservices-architectuur een vorm is van een \hyperref[sec:distributed systems]{gedistribueerd systeem} waarin services onafhankelijk kunnen werken. Daarnaast voegen ze er nog aan toe dat elke service binnen deze architectuur een specifieke bedrijfsfunctionaliteit dienen te vervullen.
+
+\section{Relevante termen}
+
+\subsection{Distributed Systems}
+\label{sec:distributed systems}
+
+\subsection{Service-Oriented Architecture}
+
+\subsection{Enterprise Service Bus}
+
+\subsection{Docker}
+
+\subsection{Kubernetes}
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
