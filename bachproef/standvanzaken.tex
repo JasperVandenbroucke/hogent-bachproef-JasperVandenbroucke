@@ -9,7 +9,7 @@ De monolithische architectuur is door de jaren heen een succesvolle keuze gewees
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{MonolithischeArchitectuur.png}
+  \includegraphics[width=0.85\textwidth]{MonolithischeArchitectuur.png}
   \caption[Voorstelling van een monolitische architectuur]{\label{fig:monolithische architectuur}Voorbeeld van een monolithische architectuur. Deze afbeelding toont de architectuur van een applicatie die de bedrijfslogica voor een e-commerce demonstreert \autocite{Gos2020}.}
 \end{figure}
 
@@ -29,7 +29,25 @@ De monolithische architectuur brengt een aantal voordelen met zich mee, zoals ee
 
 Succesvolle softwaresystemen groeien in de loop van de tijd vaak in omvang en complexiteit \autocite{Abgaz2023}. Dit door de toevoeging van verschillende functionaliteiten, wat kan resulteren in sterk gekoppelde, maar toch minder samenhangende componenten. Als gevolg hiervan hebben monolithische applicaties vaak beperkingen op het gebied van schaalbaarheid, onderhoud en prestaties. In de huidige bedrijfsomgevingen is de nood om schaalbare applicaties te ontwikkelen essentieel, wegens de opkomst van nieuwe technologieën en de vraag om zowel menselijke als technologische middelen te optimaliseren \autocite{Nayim2023}.\newline
 
-Een van de allereersten die een definitie voor microservices gaven waren \textcite{Lewis2014}. Zij beschreven in hun blogpost de microservices-architectuur als een software architectuur waarbij één enkele applicatie bestaat uit verschillende, kleinere services. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). Wanneer we dan kijken naar een recentere beschrijving van dit concept, dan benadrukken \textcite{Velepucha2023} dat de microservices-architectuur een vorm is van een \hyperref[sec:distributed systems]{gedistribueerd systeem} waarin services onafhankelijk kunnen werken. Daarnaast voegen ze er nog aan toe dat elke service binnen deze architectuur een specifieke bedrijfsfunctionaliteit dienen te vervullen.
+Een van de allereersten die een definitie voor microservices gaven waren \textcite{Lewis2014}. Zij beschreven in hun blogpost de microservices-architectuur als een software architectuur waarbij één enkele applicatie bestaat uit verschillende, kleinere services. Deze kleinere services kunnen onafhankelijk van elkaar werken en communiceren met elkaar door gebruik te maken van bijvoorbeeld Hypertext Transfer Protocol (HTTP) of een Application Programming Interface (API). Wanneer we dan kijken naar een recentere beschrijving van dit concept, dan benadrukken \textcite{Velepucha2023} dat de microservices-architectuur een vorm is van een \hyperref[sec:distributed systems]{gedistribueerd systeem} waarin services onafhankelijk kunnen werken. Daarnaast voegen ze er nog aan toe dat elke service binnen deze architectuur een specifieke bedrijfsfunctionaliteit dient te vervullen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{MicroservicesArchitectuur.png}
+	\caption[Voorstelling van een microservices architectuur]{\label{fig:microservices architectuur}Voorbeeld van een microservices architectuur. Deze afbeelding toont een vereenvoudigde representatie van een applicatie met microservices \autocite{Gos2020}.}
+\end{figure}
+
+Hierboven wordt de kern van de microservices-architectuur weergegeven. Eerder in dit hoofdstuk zagen we een gelijkaardige representatie, maar dan voor een monolithische architectuur. Daarin benadrukten we dat alle services binnen eenzelfde applicatie behoorden. Hier zien we nu dat alle 4 de services los van elkaar staan en dat ze toegankelijk zijn via één dirigerende service. Een ander opvallend aspect van deze software architectuur, die bij de bovenstaande definities van microservices niet vermeld werd, is dat elke service zijn eigen databank heeft.\newline
+
+De belangrijkste principes van deze architectuur zijn \autocite{Blinowski2022}:
+
+\begin{itemize}
+	\item \textbf{Één verantwoordelijkheid per service} - Volgens de SOLID-principes\footnote{Dit is een TEST!} moet elke service ter allen tijde slechts en alleen één verantwoordelijkheid hebben. Nooit mogen twee of meerdere services eenzelfde verantwoordelijkheid delen.
+	\item \textbf{Microservices zijn autonoom} - Elke microservice is volledig verantwoordelijk voor het uitvoeren van een specifieke bedrijfsfunctionaliteit. Hierdoor bevatten ze alle benodigde afhankelijkheden, zoals bibliotheken.
+	\item \textbf{Services zijn volwaardige componenten} - Eindpunten worden ter beschikking gesteld als API's en verbergen de interne implementatiedetails. De logica, architectuur en gebruikte technologieën blijven volledig verborgen achter de API.
+\end{itemize}
+
+\subsection{Karakteristieken van microservices}
 
 \section{Relevante termen}
 
@@ -39,6 +57,8 @@ Een van de allereersten die een definitie voor microservices gaven waren \textci
 \subsection{Service-Oriented Architecture}
 
 \subsection{Enterprise Service Bus}
+
+\subsection{Polyglot persistence}
 
 \subsection{Docker}
 
