@@ -107,10 +107,50 @@ Gedistribueerde systemen zijn de afgelopen twee decennia in trek wegens de groei
 
 Een service-oriented architectuur (SOA) wordt gedefinieerd als een architectuurstijl dat is ontworpen voor het creëren van een losse verbinding tussen systemen \autocite{Rojas2021}. De SOA stijl bestaat uit serviceproviders en -consumenten die met elkaar samenwerken via een vooraf overeengekomen interface. 
 
-Op deze manier vermindert de tijd, instpanningen en kosten die nodig zijn om oplossingen te onderhouden en uit te breiden. De basiscomponenten zijn vrij gekoppeld, interoperabel, gedistribueerd en de connectoren zijn synchrone of asynchrone berichtsmechanismen.
+Op deze manier vermindert de tijd, inspanningen en kosten die nodig zijn om oplossingen te onderhouden en uit te breiden. De basiscomponenten zijn onafhankelijk verbonden, interoperabel, gedistribueerd en de connectoren zijn synchrone of asynchrone berichtsmechanismen.\newline
+
+Volgens \textcite{Muhardany2020} is SOA een ontwerparchitectuur die helpt bij het bijsturen van de bedrijfsstrategie. SOA helpt voornamelijk bedrijven om hun strategie en diensten op een georganiseerde manier te ontwerpen. Dit betekent dat SOA niet alleen een technische impact heeft, maar ook een strategische.
+
+De basis van SOA bestaat uit drie hoofdcomponenten \autocite{Muhardany2020}:
+
+\begin{itemize}
+	\item \textbf{Bedrijfsarchitectuur} - Dit component is gebaseerd op de bedrijfsstrategieën, doelen, voorkeuren en methoden. Het is de meest cruciale factor voor een succesvolle implementatie van SOA. De bedrijfsarchitectuur zorgt ervoor dat de technische implementatie van SOA aansluit bij de algemen bedrijfsdoelen.
+	\item \textbf{Infrastructuurarchitectuur} - Deze architectuur richt zich op alle aspecten van de technische ondersteuning van SOA, zoals netwerken, servers, datacenters, filewalls, infrastructuurgebruik, veiligheid, monitoring en middleware. Het zorgt ervoor dat de benodigde technische infrastructuur aanwezig is om de services van SOA te ondersteunen.
+	\item \textbf{Informatie- en data-architectuur} - Het derde component definieert de afspraken omtrent de benodigde informatie en succesfactoren die nodig zijn om de doelen van het bedrijf te ondersteunen. Het zorgt ervoor dat de juiste informatie beschikbaar is om de prestaties van de services te meten en te verbetern.
+\end{itemize}
+
+\subsubsection{SOA vs Microservices}
+
+Service-Oriented Architecture (SOA) ontstond als een oplossing voor de uitdagingen van monolithische applicaties, met als doel herbruikbaarheid en eenvoudiger onderhoud \autocite{Newman2021}.
+
+Hoewel SOA een solide architectuur is, ontbreekt er een gemeenschappelijke mening over hoe het correct dient te worden toegepast. Veel problemen worden veroorzaakt door communicatieprotocollen, middleware en verkeerde richtlijnen voor service-groottes.
+
+Microservices verschillen van SOA omdat ze voortkomen uit de ervaringen met SOA en een verbeterde architectuur bieden. Een SOA-systeem kan servicegericht zijn, maar als alles nog steeds samen wordt gedeployed, is het geen microservices-architectuur. Microservices kunnen worden gezien als een specifieke toepassing van SOA, net zoals Extreme Programming (XP) een specifieke methode is binnen Agile softwareontwikkeling.
 
 \subsection{Enterprise Service Bus}
 \label{sec:ESB}
+
+Enterprise Service Bus (ESB) is een systeem dat een geïntegreerde en flexibele Service-Oriented Architecture (SOA) ondersteunt \autocite{Gaol2023}. Het dient als een centraal platform voor de communicatie tussen verschillende aanbieders en afnemers van services binnen een systeem, en dit zonder de logica van de applicaties zelf te beïnvloeden.\newline
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{ESB\_Representation.png}
+	\caption[Voorstelling van een Enterprise-Service Bus]{\label{fig:ESB_Representation}In bovenstaande afbeelding van \textcite{Megargel2021} zien we een  SOA die gebruik maakt van een ESB om aanbieders en afnemers van services te verbinden met elkaar.}
+\end{figure}
+
+\textcite{Gaol2023} onderscheidt verschillende modellen voor het implementeren van ESB:
+
+\begin{itemize}
+	\item \textbf{Stand Alone} - Dit model gebruikt een hub-and-spoke\footnote{Een hub-and-spoke-netwerk is een graph topology waarbij centrale knooppunten (hubs) verkeer van en naar omliggende knooppunten (spokes) dirigeert \autocite{Khosravi2024}.} (Figuur \ref{fig:hub-and-spoke}) implementatie waarin de ESB functioneert als een interface-adapter en router voor de gekoppelde services. Deze implementatie wordt vaak aangeduid als een service broker, waar het bestemmingssysteem wordt bepaald door het consumentensysteem en de ESB dient als een router.
+	\item \textbf{Service Container} - In dit model breidt de ESB uit naar het serverniveau en ondersteunt dynamische ontdekking van services. De afnemer weet niet van tevoren de exacte locatie van de gevraagde service, wat flexibliteit biedt in het serviceverkeer.
+	\item \textbf{Framework} - Het derde model gaat over een specifiek framework dat kan worden hergebruikt voor meerdere services in diverse omgevingen. Dit kan gaan van verschillende besturingssystemen tot programmeertalen. Hierdoor kunnen systemen met verschillende technologieën toch samenwerken.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{hub\_and\_spoke.png}
+	\caption[Voorstelling van een hub-and-spoke]{\label{fig:hub-and-spoke}Deze afbeelding toont links een netwerk zonder hub-and-spoke en rechts hetzelfde netwerk maar met hbu-and-spoke \autocite{Zhou2021}.}
+\end{figure}
 
 \subsection{Polyglot persistence}
 \label{sec:Polyglot Persistence}
