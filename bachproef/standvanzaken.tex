@@ -155,7 +155,23 @@ Enterprise Service Bus (ESB) is een systeem dat een geïntegreerde en flexibele 
 \subsection{Polyglot persistence}
 \label{sec:Polyglot Persistence}
 
+Polyglot persistence is een concept dat afkomstig is uit polyglot programmeren \autocite{Kazanavicius2022}. Het idee achter dit concept is om de juiste tool te kiezen voor een specifieke taak, waarbij in polyglot persistence verschillende databases worden gebruikt om diverse soorten data optimaal op te slaan. Geen enkele database (SQL of NoSQL) kan alle uitdagingen oplossen, die komen kijken wanneer we spreken over data opslag.
+
+Polyglot persistence kan gezien worden als een reactie op de opkomst van NoSQL-databases en de groeiende vraag naar flexibele en schaarlbare dataopslag \autocite{Candel2022}. Door deze toenemende populariteit van NoSQL onstond de behoeft voor een hybride benadering waarbij verschillende databases worden gecombineerd op basis van de specifieke behoeften van een applicatie. Polyglot persistence wordt steeds vaker gezien als de architectuur van de toekomst. Hoewel relationeel database nog steeds het meest gebruikt worden, evolueren ze om bepaalde NoSQL-functionaliteiten te ondersteunen.
+
+\textcite{Candel2022} benadrukt dat één van de belangrijkste drijfveren achter polyglot persistence de groeiende complexiteit en diversiteit van data in moderne softwaretoepassingen is. Het aangehaalde voorbeeld door \textcite{Candel2022} gaat over leerplatformen, online winkels en sociale netwerken en hoe deze systemen vaak een heel diverse set van data kunnen hebben, die dus kan opgeslagen worden in verschillende database. Polyglot persistence beidt  hiervoor een flexibele en efficiënte manier om diverse databases binnen één systeem te beheren.
+
 \subsection{Docker}
+
+Docker is een populaire containertechnologie die applicaties in containers draait zonder hardwarevirtualisatie, hierdoor zijn ze sneller en efficiënter dan virtuele machines \autocite{Kim2022}. Met behulp van Docker kunnen applicaties als Docker-images op elke cloudhost met een Docker-omgeving uitgevoerd worden. Dit maakt het mogelijk om applicaties tussen verschillende cloudproviders eenvoudig te migreren en te gebruiken, wat voorkomt dat je aan één bepaalde vendor vast zit.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{Docker\_VM.png}
+	\caption[Voorstelling van Docker tegenover een Virtuele Machine]{\label{fig:Docker vs VM}In bovenstaande afbeelding wordt de opstelling van een Docker container tegenover een Virtuele Machine gezet \autocite{Kim2022}.}
+\end{figure}
+
+Figuur \ref{fig:Docker vs VM} toont een vereenvoudigde vergelijking van twee methoden voor het opzetten van een applicatie. Aan de linkerkant wordt er gebruik gemaakt van een virtuele machine die draait op een server of computer, en aan de rechterkant worden Docker-containers gebruikt. Het belangrijkste verschil is dat bij virtuele machines een apart besturingssysteem moet worden geïnstalleerd. Dit besturingssysteem moet dan op zijn beurt de applicatie en alle andere onderdelen beheren voor de werking ervan. Voor deze bachelorproef is het voldoende om het verschil tussen Virtuele machine en Docker te kennen. Een diepere kijk op virtualisatie ligt buiten de scope van deze bachelorproef.
 
 \subsection{Kubernetes}
 
