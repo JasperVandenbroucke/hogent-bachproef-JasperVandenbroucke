@@ -163,7 +163,13 @@ Polyglot persistence kan gezien worden als een reactie op de opkomst van NoSQL-d
 
 \subsection{Docker}
 
-Docker is een populaire containertechnologie die applicaties in containers draait zonder hardwarevirtualisatie, hierdoor zijn ze sneller en efficiënter dan virtuele machines \autocite{Kim2022}. Met behulp van Docker kunnen applicaties als Docker-images op elke cloudhost met een Docker-omgeving uitgevoerd worden. Dit maakt het mogelijk om applicaties tussen verschillende cloudproviders eenvoudig te migreren en te gebruiken, wat voorkomt dat je aan één bepaalde vendor vast zit.
+Docker is een populaire containertechnologie die applicaties in containers draait zonder hardwarevirtualisatie, hierdoor zijn ze sneller en efficiënter dan virtuele machines \autocite{Kim2022}. Met behulp van Docker kunnen applicaties als Docker-images op elke cloudhost met een Docker-omgeving uitgevoerd worden. Dit maakt het mogelijk om applicaties tussen verschillende cloudproviders eenvoudig te migreren en te gebruiken, wat voorkomt dat je aan één bepaalde vendor vast zit.\newline
+
+Vroeger werd softwareontwikkeling gekenmerkt door een scheiding tussen ontwikkelaars en systeembeheerders \autocite{Schenker2023}. Nadat de ontwikkelaars een applicatie voltooiden werd deze overgedragen aan de systeembeheerders. Zij waren dan verantwoordelijk voor de installatie en werking op de productieservers. Deze manier van werken bracht echter heel wat uitdagingen met zich mee, vooral binnen grotere bedrijven waar meerdere teams applicaties met verschillende structuur ontwikkelden. Vaak leidden verschillen in frameworks, bibliotheken en versies tot problemen in verband met compatibiliteit, waardoor updates en implementaties dikwijls tijdrovend werden.
+
+Om deze uitdagingen te voorkomen, werden allereerst virtuele machines (VMs) gebruikt. Door het gebruik van VMs werd het mogelijk om applicaties geïsoleerd van elkaar te draaien, waardoor de compatibiliteitsproblemen verminderden. Desondanks dit voordeel moest elke VM een volledig besturingssysteem hebben, wat er dan weer voor zorgde dat VMs een zeer zware oplossing was.
+
+Een lichter alternatief was Docker met de containertechnologie. Containers verpakken een applicatie en zijn dependencies in een licht formaat. Dit zorgt ervoor dat applicaties in elke omgeving kunnen functioneren. Bovendien maakt Docker het mogelijk om sneller en efficiënter software te ontwikkelen, testen en implementeren, waardoor bedrijven flexibeler kunnen releasen.
 
 \begin{figure}[H]
 	\centering
