@@ -165,11 +165,15 @@ Polyglot persistence kan gezien worden als een reactie op de opkomst van NoSQL-d
 
 Docker is een populaire containertechnologie die applicaties in containers draait zonder hardwarevirtualisatie, hierdoor zijn ze sneller en efficiënter dan virtuele machines \autocite{Kim2022}. Met behulp van Docker kunnen applicaties als Docker-images op elke cloudhost met een Docker-omgeving uitgevoerd worden. Dit maakt het mogelijk om applicaties tussen verschillende cloudproviders eenvoudig te migreren en te gebruiken, wat voorkomt dat je aan één bepaalde vendor vast zit.\newline
 
-Vroeger werd softwareontwikkeling gekenmerkt door een scheiding tussen ontwikkelaars en systeembeheerders \autocite{Schenker2023}. Nadat de ontwikkelaars een applicatie voltooiden werd deze overgedragen aan de systeembeheerders. Zij waren dan verantwoordelijk voor de installatie en werking op de productieservers. Deze manier van werken bracht echter heel wat uitdagingen met zich mee, vooral binnen grotere bedrijven waar meerdere teams applicaties met verschillende structuur ontwikkelden. Vaak leidden verschillen in frameworks, bibliotheken en versies tot problemen in verband met compatibiliteit, waardoor updates en implementaties dikwijls tijdrovend werden.
+Vroeger werd softwareontwikkeling gekenmerkt door een scheiding tussen ontwikkelaars en systeembeheerders \autocite{Schenker2023}. Nadat de ontwikkelaars een applicatie voltooiden werd deze overgedragen aan de systeembeheerders. Zij waren dan verantwoordelijk voor de installatie en werking op de productieservers. Deze manier van werken bracht echter heel wat uitdagingen met zich mee, vooral binnen grotere bedrijven waar meerdere teams applicaties met verschillende structuren ontwikkelden. Vaak leidden verschillen in frameworks, bibliotheken en versies tot problemen in verband met compatibiliteit, waardoor updates en implementaties dikwijls tijdrovend werden.
 
-Om deze uitdagingen te voorkomen, werden allereerst virtuele machines (VMs) gebruikt. Door het gebruik van VMs werd het mogelijk om applicaties geïsoleerd van elkaar te draaien, waardoor de compatibiliteitsproblemen verminderden. Desondanks dit voordeel moest elke VM een volledig besturingssysteem hebben, wat er dan weer voor zorgde dat VMs een zeer zware oplossing was.
+Om deze uitdagingen te voorkomen, werden allereerst virtuele machines (VMs) gebruikt. Door het gebruik van VMs werd het mogelijk om applicaties geïsoleerd van elkaar te draaien, waardoor de compatibiliteitsproblemen verminderden. Desondanks dit voordeel moest elke VM een volledig besturingssysteem hebben, wat er dan weer voor zorgde dat VMs een zeer zware oplossing waren.
 
-Een lichter alternatief was Docker met de containertechnologie. Containers verpakken een applicatie en zijn dependencies in een licht formaat. Dit zorgt ervoor dat applicaties in elke omgeving kunnen functioneren. Bovendien maakt Docker het mogelijk om sneller en efficiënter software te ontwikkelen, testen en implementeren, waardoor bedrijven flexibeler kunnen releasen.
+Een lichter alternatief was Docker met de containertechnologie. \textbf{Docker-containers} verpakken een applicatie en zijn dependencies in een licht formaat. Dit zorgt ervoor dat applicaties in elke omgeving kunnen functioneren. Bovendien maakt Docker het mogelijk om sneller en efficiënter software te ontwikkelen, testen en implementeren, waardoor bedrijven flexibeler kunnen releasen.\newline
+
+Een \textbf{Docker-image} kan je vergelijken met een sjabloon dat alle benodigde bestanden en informatie bevat om een container te maken \autocite{Huang2018}. Een image definieert wat er moet zijn om de applicatie te kunnen starten, maar het heeft zelf geen fysieke aanwezigheid op het systeem of toegang tot systeembronnen zoals CPU, geheugen of opslag.
+
+Een Docker-container daarentegen heeft wel een fysieke aanwezigheid op het systeem en heeft een eigen IP-adres en netwerkpoorten. Een container kan gezien worden als een werkende instantie van een image.
 
 \begin{figure}[H]
 	\centering
@@ -180,6 +184,16 @@ Een lichter alternatief was Docker met de containertechnologie. Containers verpa
 Figuur \ref{fig:Docker vs VM} toont een vereenvoudigde vergelijking van twee methoden voor het opzetten van een applicatie. Aan de linkerkant wordt er gebruik gemaakt van een virtuele machine die draait op een server of computer, en aan de rechterkant worden Docker-containers gebruikt. Het belangrijkste verschil is dat bij virtuele machines een apart besturingssysteem moet worden geïnstalleerd. Dit besturingssysteem moet dan op zijn beurt de applicatie en alle andere onderdelen beheren voor de werking ervan. Voor deze bachelorproef is het voldoende om het verschil tussen Virtuele machine en Docker te kennen. Een diepere kijk op virtualisatie ligt buiten de scope van deze bachelorproef.
 
 \subsection{Kubernetes}
+
+Kubernetes is een open-source orkestratiesysteem voor het beheren van applicaties in containers \autocite{Turin2023}. Met behulp van Kubernetes kunnen applicaties onderhouden en geschaald worden. Binnen Kubernetes draait alles om pods. Deze pods bevatten opzich dan nog verschillende componenten om services te beheren. 
+
+\begin{itemize}
+	\item \textbf{Containers en pods} - Kubernetes gebruikt containers, zoals Docker-containers om pods te draaien. Een pod is het kleinste componenet binnen Kubernetes en bevat één of meedere containers die dan samen op een node worden geplaatst. Pods communiceren onderling via IP-adressen, maar deze adressen zijn niet statisch en worden telkens toegekend wanneer de pods herstarten.
+	\item \textbf{Nodes en clusterbeheer} - Een cluster in Kubernetes bestaat uit nodes. De master node regelt de coördinatie tussen de verschillende nodes. Worker nodes draaien de pods en hebben CPU- en geheugencapaciteiten. Om de pods toe te kennen aan de nodes is er de scheduler, die op basis van beschikbare resources en de vereisten van de applicatie de pods zal verdelen.
+	\item \textbf{Services} - Een service is een verzameling van pods die eenzelfde functie uitvoeren en als één entitiet worden gepresenteerd via een service-endpoint. Dit maakt het eenvoudiger om verzoeken naar de juiste back-end containers te routeren, zelfs wanneer deze veranderen of worden vervangen. Standaard zijn services alleen intern toegankelijk, maar ze kunnen ook extern beschikbaar gemaakt worden.
+\end{itemize}
+
+Kubernetes zorgt ervoor dat pods automatisch worden aangemaakt en opnieuw gestart \autocite{Vayghan2021}. Pods zijn dynamisch kunnen worden verplaatst of verwijderd, veranderen hun IP-adressen voortdurend, wat een slechte invloed heeft op de communicatie tussen pods. Om dit tegen te gaan, krijgen pods labels die bijgehouden blijven, zelfs wanneer ze opnieuw worden aangemaakt. Daarnaast maakt Kubernetes gebruik van services, die een vast IP-adres hebben en netwerkverkeer verdelen over de verschillende pods, waardoor stabiele en efficiënte communicatie tussen componeneten mogelijk wordt.
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
