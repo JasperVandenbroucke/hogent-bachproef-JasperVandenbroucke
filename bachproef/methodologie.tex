@@ -5,6 +5,54 @@
 \chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
 \label{ch:methodologie}
 
+Deze bachelorproef zal bestaan uit 4 grote fasen: het uitvoeren van een literatuurstudie, een toelichting van de gebruikte technologieën en tools, het opzetten van een proof-of-concept (PoC) en tot slot het uitvoeren van de testen en het evalueren van de resultaten. Hieronder zal elke fase in detail besproken worden alsook het doel van de fase samen met de uitwerking ervan.
+
+\section{Literatuurstudie uitvoeren}
+
+De eerste fase van deze bachelorproef bestaat uit een literatuurstudie. Hierin zal aan de hand van diverse bronnen een beeld gegeven worden over de huidige stand van zaken omtrent het onderwerp van deze bachelorproef.\newline 
+
+In het eerste hoofdstuk van deze studie wordt de monolithische architectuur besproken. Dit hoofdstuk definieert wat een monolithische applicatie is, wat de opbouw ervan is en welke voor- en nadelen deze architectuur met zich meebrengt. Hierbij zal er gekeken worden naar de typische gelaagde structuur (presentatielaag, businesslaag en datalaag). Vervolgens wordt de aandacht gegeven aan de microservices-architectuur. Dit hoofdstuk geeft een definitie en kenmerken van microservices, waarbij er voornamelijk zal gefocust worden op de onafhankelijkheid van services, de manier van communicatie en de impact op schaalbaarheid en onderhoud. Daarnaast worden enkele belangrijke principes van microservices aangehaald. Door deze architectuur te vergelijken met monolithische applicaties, wordt duidelijk beeld gegeven van de voordelen en uitdagingen van een microservices-architectuur.\newline
+
+Naast de bespreking van monolithische en microservices-architecturen worden in de literatuurstudie ook enkele relevante termen onder de loep genomen. Allereerst wordt er gekeken naar gedistribueerde systemen die basis vormen voor moderne softwarearchitecturen, zoals de microservices en Service-Oriented Architecture (SOA). Daarnaast wordt dieper ingegaan op het concept van een Enterprise Service Bus (ESB) als communicatiemechanisme binnen SOA. Gevolgd door de verschillen tussen SOA en microservices. Polyglot persistence wordt besproken als een strategie om verschillende databases te combineren op basis van specifieke behoeften. Tot slot wordt er nog gekeken naar Docker en Kubernetes als tools voor containerisatie voor het uitwerken van de microservices.
+
+\section{Tools en technologieën}
+\label{tools_en_technologieën}
+
+Voor de proof-of-concept (PoC) worden zowel een monolithische als een microservices-applicatie ontwikkeld. In de literatuurstudie werd vastgesteld is er een vrijheid in de keuze van technologieën bij het ontwikkelen van microservices. Dit hoofdstuk bespreekt de gekozen tools en technologieën die gebruikt zullen worden voor de implementatie van beide applicaties.
+
+\subsection{Programmeertaal en framework}
+
+Voor het ontwikkelen van de applicaties wordt C\# samen met .NET 8 gebruikt. .NET 8 biedt integratiemogelijkheden met containertechnologieën zoals Docker en Kubernetes, maar ook ondersteuning voor moderne communicatiemechanismen zoals gRPC en RabbitMQ.
+
+\subsection{Containerisatie en orkestratie}
+
+Docker zal gebruikt worden om de applicaties, samen met z'n dependencies te verpakken als containers. Waardoor de applicaties makkelijk op diverse systemen kan gebruikt worden. Voor het beheren van de microservices wordt Kubernetes gebruikt. Kubernetes zullen handig zijn voor het schalen van de containers.
+
+\subsection{Communicatie}
+
+Voor de communicatie tussen de diverse services van de microservices-applicatie zullen volgende communicatiemechanismen gebruikt worden:
+
+\begin{itemize}
+	\item \textbf{Google Remote Procedure Call (gRPC)} - Deze technologie wordt gebruikt om een efficiënte en snelle communicatie tussen microservices te voorzien, door gebruik te maken van een binair formaat wat sneller is dan JSON (Javascipt Object Notation).
+	\item \textbf{RabbitMQ} - Met deze tool is mogelijk om asynchroon berichten uit te wisselen tussen de verschillende services.
+\end{itemize}
+
+\subsection{Database}
+
+Tot slot voor de database is er ook volgens het polyglot persistence principe een vrijheid in welke type database er gekozen wordt. Voor de eenvoud van deze PoC zal er gekozen worden voor SQL Server. Zowel de monolithische als de microservices-applicatie zullen dezelfde database-engine gebruiken. Bij de microservices zullen dit per service een aparte database zijn.
+
+\section{Opzetten van PoC}
+
+In de derde fase van deze bachelorproef zal een proof-of-concept (PoC) uitgewerkt worden om de theorie en inzichten uit de literatuurstudie om te zetten in een uitwerkt voorbeeld. Het doel van deze PoC is om de verschillen tussen een monolithische architectuur en een microservices-architectuur op vlak van schaalbaarheid en complexiteit te analyseren.
+
+Hiervoor zullen twee versies van een e-commerce applicatie ontwikkeld worden. De eerste zal een monolithische architectuur hebben met alle functionaliteiten in één codebase. De tweede zal de microservices-architectuur implementeren waarbij de functionaliteiten zullen opgesplitst worden in services die apart draaien in kubernetes. De \hyperref[tools_en_technologieën]{tools en technologieën} die gebruikt zullen worden zijn hierboven aangekaart.
+
+\section{Testen en resultaten}
+
+Vervolgens zullen er testen worden uitgevoerd op de twee applicaties. Allereerst wordt de schaalbaarheid van beide applicaties getest met behulp van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestaties onder intensief gebruik van beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld door het meten van de cyclomatische complexiteit. Hiervoor zal er gebruik gemaakt worden van de gratis versie van SonarQube. Met behulp van deze tool wordt een grondige code analyse uitgevoerd om een beeld te krijgen van de complexiteit van de applicaties.
+
+Tot slot zullen de resultaten van de Apache JMeter testen en de SonarQube analyse worden gebruikt om een conclusie te trekken over de schaalbaarheid en complexiteit van de microservices-architectuur ten opzichte van de monolithische aanpak om te aan te tonen of er weldegelijk een optimalisatie is.
+
 %% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
 %% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
 %% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
@@ -25,6 +73,4 @@
 %%
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
-
-\lipsum[21-25]
 
