@@ -9,9 +9,80 @@
 
 In de moderne softwareontwikkeling wordt steeds vaker gezocht naar schaalbare en onderhoudbare architecturen om de groeiende complexiteit van webapplicaties aan te kunnen. Traditioneel zijn heel wat applicaties ontwikkeld volgens een monolithische architectuur, waarbij alle functionaliteiten binnen één en dezelfde codebase beheert worden. In de beginfase van een applicatie/project zijn voordelen heeft, zoals eenvoudige ontwikkeling en implementatie, kan het bij groeiende applicaties tot schaalbaarheid- en onderhoudbaarheidsproblemen leiden.
 
-Om deze problemen te voorkomen, wordt steeds vaker overgestapt naar een microservices-architectuur. Deze architectuurstijl verdeelt een applicatie in meerdere kleine, onafhankelijke services, die elk een specifieke bedrijfsfunctionaliteit op zich nemen, zoals productenbeheer, bestellingen, gebruikers-/klantenbeheer enz. Deze aparte services communiceren met elkaar via API's (zoals REST of gRPC). Het grootste voordeel bij microservices is op het gebied van schaalbaarheid, flexibiliteit en onderhoudbaarheid, maar als kanttekening brengen ze een extra uitdaging met zich mee, zoals dataconsistentie en orkestratie.
+Om deze problemen te voorkomen, wordt steeds vaker overgestapt naar een microservices\--architectuur. Deze architectuurstijl verdeelt een applicatie in meerdere kleine, onafhankelijke services, die elk een specifieke bedrijfsfunctionaliteit op zich nemen, zoals productenbeheer, bestellingen, gebruikers-/klantenbeheer enz. Deze aparte services communiceren met elkaar via API's (zoals REST of gRPC). Het grootste voordeel bij microservices is op het gebied van schaalbaarheid, flexibiliteit en onderhoudbaarheid, maar als kanttekening brengen ze een extra uitdaging met zich mee, zoals dataconsistentie en orkestratie.
 
 Bij het stagebedrijf Fabrimode, dat actief is binnen de mode-industrie, is er interesse in het onderzoeken van de opties van microservices. Daarom zal in dit onderzoek de focus liggen op de potentiële voordelen van een overgang naar microservices. Het hoofddoel van deze bachelorproef is om inzicht te krijgen in de mogelijkheden van deze technologie voor Fabrimode.
+
+\section{Probleemstelling}
+
+Veel bedrijven ondervinden problemen bij het schalen van een monolithische applicatie, voornamelijk wanneer het aantal gebruikers toenemen. Een veelvoorkomend probleem is dat het moeilijk wordt om nieuwe functionaliteiten toe te voegen vanwege de codebase die steeds uitgebreider wordt.
+
+Hierdoor ontstaat de vraag of een microservices-architectuur een aanzienlijke verbetering kan bieden op het gebied van schaalbaarheid in vergelijking met een traditionele, monolithische architectuur. Is de overstap naar microservices ook dan ook zinvol?
+
+Daarnaast brengt een microservices-architectuur ook uitdagingen met zich mee zoals:
+
+\begin{itemize}
+	\item Hoe presteert een microservices-architectuur in vergelijking met een monolithische architectuur onder verschillende omstandigheden van belasting?
+	\item Is er extra complexiteit? Zo ja, hoe groot verschilt dit met een monolithische applicatie?
+	\item Welke tools en technologieën zijn essentieel voor een geslaagde implementatie?
+\end{itemize}
+
+\section{Onderzoeksdoelstelling}
+
+Biedt een microservices-architectuur een optimalisatie omtrent schaalbaarheid en welke impact heeft het op de ontwikkelingscomplexiteit? Dat is het doel van deze bachelorproef en zal aan de hand van een proof-of-concept (PoC) onderzocht worden.
+
+De twee architecturen zullen geëvalueerd worden op basis van:
+
+\begin{itemize}
+	\item \textbf{Schaalbaarheid} - Hoe goed kunnen de applicaties omgaan met een groot aantal gebruikers?
+	\item \textbf{Complexiteit} - Hoe beïnvloeden de architecturen de respectievelijke complexiteit?
+\end{itemize}
+
+De resultaten zullen Fabrimode helpen om te beslissen of een overgang naar microservices zinvol is en welke factoren er in acht genomen moeten worden.
+
+\section{Onderzoeksvraag}
+
+De onderzoeksvraag luid als volgt:
+
+\textit{Welke impact heeft een microservices-architectuur op de schaalbaarheid en ontwikkelingscomplexiteit van een webapplicatie?}
+
+Volgende deelvragen zullen bijdragen tot de conclusie van deze bachelorproef:
+
+\begin{itemize}
+	\item Hoe presteert een microservices-architectuur in vergelijking met een monolithische architectuur op het gebied van schaalbaarheid?
+	\item Welke aspecten moeten in acht genomen worden bij het overstappen naar een microservices-architectuur?
+	\item Welke technologieën en tools zijn essentieel voor het implementeren en beheren van een microservices-architectuur?
+\end{itemize}
+
+\section{Methodologie}
+
+Om de voorgaande vragen te beantwoorden zal er een proof-of-concept (PoC) uitgewerkt worden waarin twee veries van een e-commerce webapplicatie worden ontwikkeld:
+
+\begin{enumerate}
+	\item Monolithische applicatie:
+	\begin{itemize}
+		\item C\# en .NET 8
+		\item Alles binnen één codebase
+		\item Dataopslag via SQL Server-database
+	\end{itemize}
+	\item Microservices applicatie
+	\begin{itemize}
+		\item C\# en .NET 8
+		\item Functionaliteiten opsplitsen in afzonderlijke services
+		\item Communicatie via gRPC en RabbitMQ
+		\item Containerisatie via Docker en Kubernetes
+		\item Elke services zijn eigen SQL Server-database
+	\end{itemize}
+\end{enumerate}
+
+De beide applicaties zullen getest en geëvalueerd worden met behulp van twee tools:
+
+\begin{itemize}
+	\item \textbf{Apache JMeter} wordt gebruikt voor schaalbaarheidstesten, waarmee onderzocht zal worden hoe beide architecturen presteren onder verschillende belastingniveaus.
+	\item Met de gratis versie van \textbf{SonarQube} zal een code-analyse uitgevoerd worden, waarbij gekeken wordt naar codecomplexiteit (cyclomatische complexiteit).
+\end{itemize}
+
+In hoofdstuk \ref{ch:methodologie} wordt dieper ingegaan op de methodologie en hoe de PoC opgebouwd is.
 
 %De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
 
