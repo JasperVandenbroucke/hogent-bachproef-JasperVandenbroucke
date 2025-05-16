@@ -13,7 +13,7 @@ De eerste fase van deze bachelorproef bestaat uit een literatuurstudie. Hierin z
 
 In het eerste hoofdstuk van deze studie wordt de monolithische architectuur besproken. Dit hoofdstuk definieert wat een monolithische applicatie is, wat de opbouw ervan is en welke voor- en nadelen deze architectuur met zich meebrengt. Hierbij zal er gekeken worden naar de typische gelaagde structuur (presentatielaag, businesslaag en datalaag). Vervolgens wordt de aandacht gegeven aan de microservices-architectuur. Dit hoofdstuk geeft een definitie en kenmerken van microservices, waarbij er voornamelijk zal gefocust worden op de onafhankelijkheid van services, de manier van communicatie en de impact op schaalbaarheid en onderhoud. Daarnaast worden enkele belangrijke principes van microservices aangehaald. Door deze architectuur te vergelijken met monolithische applicaties, wordt duidelijk beeld gegeven van de voordelen en uitdagingen van een microservices-architectuur.\newline
 
-Naast de bespreking van monolithische en microservices-architecturen worden in de literatuurstudie ook enkele relevante termen onder de loep genomen. Allereerst wordt er gekeken naar gedistribueerde systemen die basis vormen voor moderne softwarearchitecturen, zoals de microservices en Service-Oriented Architecture (SOA). Daarnaast wordt dieper ingegaan op het concept van een Enterprise Service Bus (ESB) als communicatiemechanisme binnen SOA. Gevolgd door de verschillen tussen SOA en microservices. Polyglot persistence wordt besproken als een strategie om verschillende databases te combineren op basis van specifieke behoeften. Tot slot wordt er nog gekeken naar Docker en Kubernetes als tools voor containerisatie bij het uitwerken van de microservices.
+Naast de bespreking van monolithische en microservices-architecturen worden ook Docker en Kubernetes onder de loep genomen. Tot slot worden in de literatuurstudie enkele relevante termen uitgebreider toegelicht. Allereerst wordt er gekeken naar gedistribueerde systemen die basis vormen voor moderne softwarearchitecturen, zoals de microservices en Service-Oriented Architecture (SOA). Daarnaast wordt dieper ingegaan op het concept van een Enterprise Service Bus (ESB) als communicatiemechanisme binnen SOA. Gevolgd door de verschillen tussen SOA en microservices. Polyglot persistence wordt besproken als een strategie om verschillende databases te combineren op basis van specifieke behoeften.
 
 \section{Tools en technologieën}
 \label{tools_en_technologieën}
@@ -25,6 +25,7 @@ Voor de proof-of-concept (PoC) wordt er zowel een monolithische als een microser
 Voor het ontwikkelen van de applicaties wordt C\# samen met .NET 8 gebruikt. .NET 8 biedt integratiemogelijkheden met containertechnologieën zoals Docker en Kubernetes, maar ook ondersteuning voor moderne communicatiemechanismen zoals RabbitMQ.
 
 \subsection{Containerisatie en orkestratie}
+\label{containerisatie_orkestratie}
 
 Docker zal gebruikt worden om de applicaties, samen met z'n dependencies, te verpakken als containers. Hierdoor kunnen de applicaties makkelijk op diverse systemen gebruikt worden. Voor het beheren van de microservices wordt Kubernetes gebruikt. Kubernetes biedt uitgebreide mogelijkheden voor het automatisch schalen, distribueren en herstellen van containers, wat zorgt voor een robuuste en flexibele microservices-architectuur.
 
@@ -34,6 +35,7 @@ Voor de communicatie tussen de diverse services van de microservices-applicatie 
 
 \begin{itemize}
 	\item \textbf{RabbitMQ} - RabbitMQ maakt het mogelijk om berichten asynchroon uit te wisselen tussen verschillende services. Dit zorgt voor een losse koppeling tussen services, waardoor ze onafhankelijk van elkaar kunnen functioneren en schalen. RabbitMQ ondersteunt betrouwbare berichtafhandeling, berichtvolgorde en verschillende berichtpatronen zoals publish/subscribe, wat het bijzonder geschikt maakt voor microservices-architecturen waarin flexibiliteit en schaalbaarheid cruciaal zijn.
+	\item \textbf{HTTP} – Voor eenvoudige en directe communicatie tussen services wordt gebruikgemaakt van een HTTP-client. Deze vorm van synchrone communicatie is geschikt wanneer een service onmiddellijk een antwoord van een andere service nodig heeft, bijvoorbeeld bij het opvragen van productgegevens. Hoewel deze aanpak minder losgekoppeld is dan asynchrone communicatie, blijft het een praktische manier van communicatie in een microservices-architectuur.
 \end{itemize}
 
 \subsection{Database}
@@ -49,7 +51,7 @@ Hiervoor zullen twee versies van een e-commerce applicatie ontwikkeld worden. De
 
 \section{Testen en resultaten}
 
-Vervolgens zullen er testen worden uitgevoerd op de twee applicaties. Allereerst wordt de schaalbaarheid van beide applicaties getest met behulp van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestaties onder intensief gebruik van beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld door het meten van de cyclomatische complexiteit. Hiervoor zal er gebruik gemaakt worden van de gratis versie van SonarQube. Met behulp van deze tool wordt een grondige code analyse uitgevoerd om een beeld te krijgen van de complexiteit van de applicaties.
+Vervolgens zullen er testen worden uitgevoerd op de twee applicaties. Allereerst wordt de schaalbaarheid van beide applicaties getest met behulp van Apache JMeter. Deze gratis open-source software maakt het mogelijk om simulaties van hoge belasting uit te voeren, zodat de prestaties onder intensief gebruik van beide applicaties kunnen vergeleken worden. Daarnaast wordt de complexiteit beoordeeld door het meten van de cyclomatische en cognitieve complexiteit. Hiervoor zal er gebruik gemaakt worden van de gratis versie van SonarQube. Met behulp van deze tool wordt een grondige code analyse uitgevoerd om een beeld te krijgen van de complexiteit van de applicaties.
 
 Tot slot zullen de resultaten van de Apache JMeter testen en de SonarQube analyse worden gebruikt om een conclusie te trekken over de schaalbaarheid en complexiteit van de microservices-architectuur ten opzichte van de monolithische aanpak om aan te tonen of er weldegelijk een optimalisatie is.
 
@@ -63,7 +65,7 @@ In dit hoofdstuk wordt de technische uitwerking van de proof-of-concept (PoC) be
 
 \section{Overzicht van de functionaliteiten}
 
-Voor de uitwerking van de proof-of-concept werd gekozen om een vereenvoudigde e-commerce applicatie te ontwikkelen. Dit type applicatie omvat diverse bedrijfsprocessen. Zowel de monolithische als de microservices-applicatie zullen dezelfde functionaliteiten implementeren, zodat in een later stadium de applicatie eerlijk vergeleken kunnen worden op vlak van schaalbaareid.
+Voor de uitwerking van de proof-of-concept werd gekozen om een vereenvoudigde e-commerce applicatie te ontwikkelen. Dit type applicatie omvat diverse bedrijfsprocessen. Zowel de monolithische als de microservices-applicatie zullen dezelfde functionaliteiten implementeren, zodat in een later stadium de applicaties eerlijk vergeleken kunnen worden op vlak van schaalbaarheid en complexiteit.
 
 \subsection{Gekozen functionaliteiten}
 
@@ -145,29 +147,14 @@ De \texttt{ProductsController} bevat de API-endpoints waarmee de client producte
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=ProductsController.cs (fragment), label=lst:MonoProductsController]
-[Route("api/[controller]")]
-[ApiController]
-[Authorize]
-public class ProductsController : ControllerBase
+[HttpGet]
+public async Task<ActionResult<List<ProductReadDto>>> GetProducts()
 {
-	private readonly IProductService _service;
-	private readonly IMapper _mapper;
-	
-	public ProductsController(IProductService service, IMapper mapper)
-	{
-		_service = service;
-		_mapper = mapper;
-	}
-	
-	[HttpGet]
-	public async Task<ActionResult<List<ProductReadDto>>> GetProducts()
-	{
-		Console.WriteLine("--> Getting all products...");
-		var products = await _service.GetAllProducts();
-		if (products == null)
-			return NotFound("No products found");
-		return Ok(_mapper.Map<List<ProductReadDto>>(products));
-	}
+	Console.WriteLine("--> Getting all products...");
+	var products = await _service.GetAllProducts();
+	if (products == null)
+		return NotFound("No products found");
+	return Ok(_mapper.Map<List<ProductReadDto>>(products));
 }
 \end{lstlisting}
 
@@ -176,14 +163,9 @@ Tot slot wordt hieronder de implementatie van de \texttt{ProductService} weergeg
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=ProductService.cs (fragment), label=lst:MonoProductService]
-public class ProductService(AppDbContext context) : IProductService
+public async Task<List<Product>> GetAllProducts()
 {
-	private readonly AppDbContext _context = context;
-	
-	public async Task<List<Product>> GetAllProducts()
-	{
-		return await _context.Products.ToListAsync();
-	}
+	return await _context.Products.ToListAsync();
 }
 \end{lstlisting}
 
@@ -239,39 +221,22 @@ De \texttt{ShoppingCartsController} bevat naast een GET-endpoint ook een PUT-end
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=ShoppingCartsController.cs (fragment), label=lst:MonoShoppingCartController]
-[Route("api/[controller]")]
-[ApiController]
-[Authorize]
-public class ShoppingCartsController : ControllerBase
+[HttpPut("{productId}")]
+public async Task<ActionResult> AddProductToCart(int productId)
 {
-	private readonly IShoppingCartService _shoppingCartService;
-	private readonly IProductService _productService;
-	private readonly IMapper _mapper;
+	Console.WriteLine("--> Adding a product...");
+	var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+	if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+		return Unauthorized("UserId kon niet worden bepaald uit JWT token");
 	
-	public ShoppingCartsController(IShoppingCartService shoppingCartService, IProductService productService, IMapper mapper)
+	try
 	{
-		_shoppingCartService = shoppingCartService;
-		_productService = productService;
-		_mapper = mapper;
+		await _shoppingCartService.AddProductToCart(userId, productId);
+		return Ok($"Product {productId} added to cart for user {userId}");
 	}
-	
-	[HttpPut("{productId}")]
-	public async Task<ActionResult> AddProductToCart(int productId)
+	catch (Exception ex)
 	{
-		Console.WriteLine("--> Adding a product...");
-		var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-		if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
-			return Unauthorized("UserId kon niet worden bepaald uit JWT token");
-		
-		try
-		{
-			await _shoppingCartService.AddProductToCart(userId, productId);
-			return Ok($"Product {productId} added to cart for user {userId}");
-		}
-		catch (Exception ex)
-		{
-			return BadRequest($"Failed to add product {productId} to cart of user {userId}: {ex.Message}");
-		}
+		return BadRequest($"Failed to add product {productId} to cart of user {userId}: {ex.Message}");
 	}
 }
 \end{lstlisting}
@@ -281,32 +246,26 @@ De methode uit de \texttt{ShoppingCartService} bevat de logica om een product to
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=ShoppingCartService.cs (fragment), label=lst:MonoShoppingCartService]
-public class ShoppingCartService(AppDbContext context, IProductService productService) : IShoppingCartService
+public async Task AddProductToCart(int userId, int productId)
 {
-	private readonly AppDbContext _context = context;
-	public readonly IProductService _productService = productService;
+	if (!await _context.Products.AnyAsync(p => p.Id == productId))
+	throw new Exception($"No product found with id {productId}");
 	
-	public async Task AddProductToCart(int userId, int productId)
+	var cart = await GetCart(userId);
+	if (cart == null)
 	{
-		if (!await _context.Products.AnyAsync(p => p.Id == productId))
-		throw new Exception($"No product found with id {productId}");
-		
-		var cart = await GetCart(userId);
-		if (cart == null)
-		{
-			cart = new ShoppingCart { UserId = userId };
-			_context.ShoppingCarts.Add(cart);
-			await _context.SaveChangesAsync();
-		}
-		
-		var cartItem = new ShoppingCartItem
-		{
-			ShoppingCartId = cart.Id,
-			ProductId = productId
-		};
-		_context.ShoppingCartItems.Add(cartItem);
+		cart = new ShoppingCart { UserId = userId };
+		_context.ShoppingCarts.Add(cart);
 		await _context.SaveChangesAsync();
 	}
+	
+	var cartItem = new ShoppingCartItem
+	{
+		ShoppingCartId = cart.Id,
+		ProductId = productId
+	};
+	_context.ShoppingCartItems.Add(cartItem);
+	await _context.SaveChangesAsync();
 }
 \end{lstlisting}
 
@@ -371,49 +330,32 @@ De \texttt{OrdersController} bevat een POST-endpoint om een bestelling te plaats
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=OrdersController.cs (fragment), label=lst:MonoOrdersController]
-[Route("api/[controller]")]
-[ApiController]
-[Authorize]
-public class OrdersController : ControllerBase
+[HttpPost]
+public async Task<ActionResult<OrderReadDto>> CreateOrder()
 {
-	private readonly IOrderService _orderService;
-	private readonly IShoppingCartService _shoppingCartService;
-	private readonly IMapper _mapper;
-	
-	public OrdersController(IOrderService orderService, IShoppingCartService shoppingCartService, IMapper mapper)
+	try
 	{
-		_orderService = orderService;
-		_shoppingCartService = shoppingCartService;
-		_mapper = mapper;
+		Console.WriteLine("--> Placing an order...");
+		var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+		if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+		return Unauthorized("UserId kon niet worden bepaald uit JWT token");
+		
+		var cart = await _shoppingCartService.GetCart(userId);
+		if (cart is null) return NotFound($"ShoppingCart not found for user {userId}");
+		var cartDto = _mapper.Map<ShoppingCartReadDto>(cart);
+		var orderToPlace = _mapper.Map<Order>(cartDto);
+		orderToPlace.Status = "Verwerking";
+		orderToPlace.TotalPrice = orderToPlace.Items.Sum(i => i.Price);
+		
+		await _orderService.PlaceOrder(orderToPlace);
+		await _shoppingCartService.RemoveCartOfUser(userId);
+		
+		var orderReadDto = _mapper.Map<OrderReadDto>(orderToPlace);
+		return CreatedAtRoute(nameof(GetOrderById), new { OrderId = orderReadDto.Id }, orderReadDto);
 	}
-	
-	[HttpPost]
-	public async Task<ActionResult<OrderReadDto>> CreateOrder()
+	catch (Exception ex)
 	{
-		try
-		{
-			Console.WriteLine("--> Placing an order...");
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
-			return Unauthorized("UserId kon niet worden bepaald uit JWT token");
-			
-			var cart = await _shoppingCartService.GetCart(userId);
-			if (cart is null) return NotFound($"ShoppingCart not found for user {userId}");
-			var cartDto = _mapper.Map<ShoppingCartReadDto>(cart);
-			var orderToPlace = _mapper.Map<Order>(cartDto);
-			orderToPlace.Status = "Verwerking";
-			orderToPlace.TotalPrice = orderToPlace.Items.Sum(i => i.Price);
-			
-			await _orderService.PlaceOrder(orderToPlace);
-			await _shoppingCartService.RemoveCartOfUser(userId);
-			
-			var orderReadDto = _mapper.Map<OrderReadDto>(orderToPlace);
-			return CreatedAtRoute(nameof(GetOrderById), new { OrderId = orderReadDto.Id }, orderReadDto);
-		}
-		catch (Exception ex)
-		{
-			return BadRequest(ex.Message);
-		}
+		return BadRequest(ex.Message);
 	}
 }
 \end{lstlisting}
@@ -423,15 +365,10 @@ De logica voor het effectief plaatsen van een bestelling bevindt zich in de \tex
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=OrderService.cs (fragment), label=lst:MonoOrderService]
-public class OrderService(AppDbContext context) : IOrderService
+public async Task PlaceOrder(Order orderToPlace)
 {
-	private readonly AppDbContext _context = context;
-	
-	public async Task PlaceOrder(Order orderToPlace)
-	{
-		_context.Orders.Add(orderToPlace);
-		await _context.SaveChangesAsync();
-	}
+	_context.Orders.Add(orderToPlace);
+	await _context.SaveChangesAsync();
 }
 \end{lstlisting}
 
@@ -440,19 +377,13 @@ Tot slot wordt de winkelwagen verwijderd via de \texttt{ShoppingCartService}, om
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=RemoveCartOfUser in ShoppingCartService.cs, label=lst:MonoRemoveCart]
-public class ShoppingCartService(AppDbContext context, IProductService productService) : IShoppingCartService
+public async Task RemoveCartOfUser(int userId)
 {
-	private readonly AppDbContext _context = context;
-	public readonly IProductService _productService = productService;
-	
-	public async Task RemoveCartOfUser(int userId)
+	var cart = await _context.ShoppingCarts.FirstOrDefaultAsync(c => c.UserId == userId);
+	if (cart != null)
 	{
-		var cart = await _context.ShoppingCarts.FirstOrDefaultAsync(c => c.UserId == userId);
-		if (cart != null)
-		{
-			_context.ShoppingCarts.Remove(cart);
-			await _context.SaveChangesAsync();
-		}
+		_context.ShoppingCarts.Remove(cart);
+		await _context.SaveChangesAsync();
 	}
 }
 \end{lstlisting}
@@ -487,347 +418,340 @@ Binnen de microservices versie van de applicatie wordt synchrone communicatie bi
 \medskip
 
 \begin{lstlisting}[style=mystyleA, caption=ShoppingCartsController.cs (fragment)(Microservice), label=lst:MicroSCCPUT]
-[Route("api/[controller]")]
-[ApiController]
-public class ShoppingCartsController : ControllerBase
+[HttpPut("{productId}")]
+public async Task<ActionResult> AddProductToCart(int productId)
 {
-	private readonly IShoppingCartRepo _repository;
-	private readonly IMapper _mapper;
-	private readonly IProductDataClient _productClient;
+	Console.WriteLine("--> Adding a product...");
 	
-	public ShoppingCartsController(IShoppingCartRepo repository, IMapper mapper, IProductDataClient productClient)
-	{
-		_repository = repository;
-		_mapper = mapper;
-		_productClient = productClient;
-	}
+	var userIdHeader = Request.Headers["UserId"].FirstOrDefault();
+	if (string.IsNullOrEmpty(userIdHeader))
+		return BadRequest("UserId header is required");
 	
-	[HttpPut("{productId}")]
-	public async Task<ActionResult> AddProductToCart(int productId)
-	{
-		Console.WriteLine("--> Adding a product...");
-		
-		var userIdHeader = Request.Headers["UserId"].FirstOrDefault();
-		if (string.IsNullOrEmpty(userIdHeader))
-			return BadRequest("UserId header is required");
-		
-		if (!int.TryParse(userIdHeader, out int userId))
-			return BadRequest("UserId header must be a valid integer");
-		
-		var productExists = await _productClient.DoesProductExists(productId);
-		if (!productExists)
-			return BadRequest($"Product with id {productId} does not exist");
-		
-		var response = await _repository.AddProductToCart(userId, productId);
-		
-		if (response)
-			return Ok($"Product {productId} added to cart for user {userId}");
-		else
-			return BadRequest($"Failed to add product {productId} to cart for user {userId}");
-	}
+	var productExists = await _productClient.DoesProductExists(productId);
+	if (!productExists)
+		return BadRequest($"Product with id {productId} does not exist");
+	
+	var response = await _repository.AddProductToCart(userId, productId);
+	
+	if (response)
+		return Ok($"Product {productId} added to cart for user {userId}");
+	else
+		return BadRequest($"Failed to add product {productId} to cart for user {userId}");
 }
 \end{lstlisting}
 
 \begin{lstlisting}[style=mystyleA, caption=ProductDataClient.cs (fragment)(Microservice), label=lst:MicroProductDataCl]
-public class ProductDataClient : IProductDataClient
+public async Task<bool> DoesProductExists(int productId)
 {
-	private readonly HttpClient _httpClient;
-	private readonly IConfiguration _configuration;
-	
-	public ProductDataClient(HttpClient httpClient, IConfiguration configuration)
-	{
-		_httpClient = httpClient;
-		_configuration = configuration;
-	}
-	
-	public async Task<bool> DoesProductExists(int productId)
-	{
-		Console.WriteLine("--> Does product exists?");
-		var response = await _httpClient.GetAsync($"{_configuration["ProductService"]}/{productId}");
-		if (response.IsSuccessStatusCode)
-			return true;
-		return false;
-	}
+	Console.WriteLine("--> Does product exists?");
+	var response = await _httpClient.GetAsync($"{_configuration["ProductService"]}/{productId}");
+	if (response.IsSuccessStatusCode)
+		return true;
+	return false;
 }
 \end{lstlisting}
 
 \subsubsection{Asyncrhone communicatie}
 
-Asynchrone communicatie is terug te vinden tussen de \texttt{OrderService} en de \texttt{ShoppingCartService}. Deze moeten namelijk niet wachten op een antwoord van de andere service om ver te kunnen met hun intern proces. Wanneer een bestelling wordt geplaatst, wordt er via RabbitMQ een bericht verstuurd dat een bestelling met betrekking tot een bepaalde winkelwagen is aangemaakt. De \texttt{ShoppingCartService} ontvangt dit bericht en verwijdert de desbetreffende winkelwagen.
-\medskip
+Asynchrone communicatie is terug te vinden tussen de \texttt{OrderService} en de \texttt{ShoppingCartService}. Deze moeten namelijk niet wachten op een antwoord van de andere service om ver te kunnen met hun intern proces. Wanneer een bestelling wordt geplaatst, wordt er via RabbitMQ een bericht verstuurd dat een bestelling met betrekking tot een bepaalde winkelwagen is aangemaakt. De \texttt{ShoppingCartService} ontvangt dit bericht en verwijdert de desbetreffende winkelwagen.\newline
+
+Onderstaand fragment uit de \texttt{OrdersController} toont het POST-endpoint die gebruikt wordt wanneer een gebruiker zijn bestelling wil plaatsen. Hier zal eerst een synchroon request uitgevoerd worden naar de \texttt{ShoppingCartService} om de gebruikers zijn/haar winkelwagen op te halen. Na het aanmaken van de bestelling wordt een asynchoon bericht verstuurd via de \texttt{MessageBusClient}.\medskip
 
 \begin{lstlisting}[style=mystyleA, caption=OrdersController.cs (fragment)(Microservice), label=lst:MicroOrdersC]
-[Route("api/[controller]")]
-[ApiController]
-public class OrdersController : ControllerBase
-{	
-	[HttpPost]
-	public async Task<ActionResult<OrderReadDto>> CreateOrder()
+[HttpPost]
+public async Task<ActionResult<OrderReadDto>> CreateOrder()
+{
+	Console.WriteLine("--> Placing an order...");
+	try
 	{
-		Console.WriteLine("--> Placing an order...");
+		// Get the user ID from the logged-in user
+		var userIdHeader = Request.Headers["UserId"].FirstOrDefault();
+		if (string.IsNullOrEmpty(userIdHeader))
+			return BadRequest("UserId header is required");
+		if (!int.TryParse(userIdHeader, out int userId))
+			return BadRequest("UserId header must be a valid integer");
+		
+		var shoppingCartDto = await _dataClient.GetShoppingCartContent(userId);
+		var orderToPlace = _mapper.Map<Order>(shoppingCartDto);
+		orderToPlace.Status = "Verwerking";
+		orderToPlace.TotalPrice = orderToPlace.Items.Sum(i => i.Price);
+		
+		await _repository.PlaceOrder(orderToPlace);
+		
+		var orderReadDto = _mapper.Map<OrderReadDto>(orderToPlace);
+		
+		// Tell the ShoppingCartService about the order
 		try
 		{
-			// Get the user ID from the logged-in user
-			var userIdHeader = Request.Headers["UserId"].FirstOrDefault();
-			if (string.IsNullOrEmpty(userIdHeader))
-				return BadRequest("UserId header is required");
-			if (!int.TryParse(userIdHeader, out int userId))
-				return BadRequest("UserId header must be a valid integer");
-			
-			var shoppingCartDto = await _dataClient.GetShoppingCartContent(userId);
-			var orderToPlace = _mapper.Map<Order>(shoppingCartDto);
-			orderToPlace.Status = "Verwerking";
-			orderToPlace.TotalPrice = orderToPlace.Items.Sum(i => i.Price);
-			
-			await _repository.PlaceOrder(orderToPlace);
-			
-			var orderReadDto = _mapper.Map<OrderReadDto>(orderToPlace);
-			
-			// Tell the ShoppingCartService about the order
-			try
-			{
-				var orderPublishedDto = _mapper.Map<OrderPublishedDto>(orderReadDto);
-				orderPublishedDto.Event = "Order_Published";
-				await _messageBusClient.PublishNewOrder(orderPublishedDto);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
-			}
-			
-			return CreatedAtRoute(nameof(GetOrderById), new { OrderId = orderReadDto.Id }, orderReadDto);
+			var orderPublishedDto = _mapper.Map<OrderPublishedDto>(orderReadDto);
+			orderPublishedDto.Event = "Order_Published";
+			await _messageBusClient.PublishNewOrder(orderPublishedDto);
 		}
 		catch (Exception ex)
 		{
-			return BadRequest(ex.Message);
+			Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
 		}
+		
+		return CreatedAtRoute(nameof(GetOrderById), new { OrderId = orderReadDto.Id }, orderReadDto);
+	}
+	catch (Exception ex)
+	{
+		return BadRequest(ex.Message);
 	}
 }
 \end{lstlisting}
 
-\begin{lstlisting}[style=mystyleA, caption=MessageBusClient.cs (Microservice), label=lst:MicroMessageBusCl]
-public class MessageBusClient : IMessageBusClient
+In de \texttt{MessageBusClient} wordt het bericht geformatteerd als JSON en op de RabbitMQ-messagebus geplaatst, zodat de \texttt{ShoppingCartService} het bericht kan ontvangen en de nodigde acties kan uitvoeren.\medskip
+
+\begin{lstlisting}[style=mystyleA, caption=MessageBusClient.cs (fragment) (Microservice), label=lst:MicroMessageBusCl]
+public async Task PublishNewOrder(OrderPublishedDto orderPublishedDto)
 {
-	private readonly IConfiguration _config;
-	private readonly ConnectionFactory _factory;
-	private IConnection? _connection;
-	private IChannel? _channel;
+	var message = JsonSerializer.Serialize(orderPublishedDto);
 	
-	public MessageBusClient(IConfiguration config)
+	if (_channel == null || _connection == null)
 	{
-		_config = config;
-		_factory = new ConnectionFactory()
-		{
-			HostName = _config["RabbitMQHost"],
-			Port = int.Parse(_config["RabbitMQPort"])
-		};
+		throw new InvalidOperationException("RabbitMQ connection is not initialized");
 	}
 	
-	public async Task InitializeAsync()
+	if (_connection.IsOpen)
 	{
-		try
-		{
-			_connection = await _factory.CreateConnectionAsync();
-			_channel = await _connection.CreateChannelAsync();
-			
-			await _channel.ExchangeDeclareAsync(exchange: "trigger", type: ExchangeType.Fanout);
-			
-			_connection.ConnectionShutdownAsync += RabbitMQ_ConnectionShutdown;
-			
-			Console.WriteLine("--> Connected to MessageBus");
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"--> Could not connect to message bus: {ex.Message}");
-		}
+		Console.WriteLine("--> RabbitMQ Connection Open, sending something...");
+		// Put the OrderPublishedDto onto the MessageBus
+		await SendMessage(message);
 	}
-	
-	public async Task PublishNewOrder(OrderPublishedDto orderPublishedDto)
+	else
 	{
-		var message = JsonSerializer.Serialize(orderPublishedDto);
-		
-		if (_channel == null || _connection == null)
-		{
-			throw new InvalidOperationException("RabbitMQ connection is not initialized");
-		}
-		
-		if (_connection.IsOpen)
-		{
-			Console.WriteLine("--> RabbitMQ Connection Open, sending something...");
-			// Put the OrderPublishedDto onto the MessageBus
-			await SendMessage(message);
-		}
-		else
-		{
-			Console.WriteLine("--> RabbitMQ Connection is closed, not sending");
-		}
+		Console.WriteLine("--> RabbitMQ Connection is closed, not sending");
 	}
+}
+
+private async Task SendMessage(string message)
+{
+	var body = Encoding.UTF8.GetBytes(message);
 	
-	private async Task SendMessage(string message)
-	{
-		var body = Encoding.UTF8.GetBytes(message);
-		
-		await _channel.BasicPublishAsync(
-			exchange: "trigger",
-			routingKey: "",
-			body: body
-		);
-		Console.WriteLine($"--> We have sent {message}");
-	}
+	await _channel.BasicPublishAsync(
+		exchange: "trigger",
+		routingKey: "",
+		body: body
+	);
+	Console.WriteLine($"--> We have sent {message}");
+}
+\end{lstlisting}
+
+In de \texttt{ShoppingCartService} wordt er geluisterd naar de message bus. Wanneer de \texttt{OrderService} via RabbitMQ een bericht verstuurt, controleert de \texttt{ShoppingCartService} of het om een geldig event gaat. Indien dit het geval is, wordt de winkelwagen van de gebruiker verwijderd.\medskip
+
+\begin{lstlisting}[style=mystyleA, caption=MessageBusSub.cs (fragment) (Microservice), label=lst:MicroMessageBusSb]
+private async void WaitForEvents()
+{
+	var consumer = new AsyncEventingBasicConsumer(_channel);
 	
-	public void Dispose()
+	consumer.ReceivedAsync += (model, ea) =>
 	{
-		System.Console.WriteLine("--> MessageBus Disposed");
-		if (_channel.IsOpen)
-		{
-			_channel.CloseAsync();
-			_connection.CloseAsync();
-		}
-	}
+		Console.WriteLine("--> Event Received!");
+		byte[] body = ea.Body.ToArray();
+		var message = Encoding.UTF8.GetString(body);
+		_eventProcessor.ProcessEvent(message);
+		return Task.CompletedTask;
+	};
 	
-	private async Task RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)
+	await _channel.BasicConsumeAsync(queue: _queueName, autoAck: true, consumer: consumer);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=mystyleA, caption=EventProcessor.cs (fragment) (Microservice), label=lst:MicroEventPrc]
+public async Task ProcessEvent(string message)
+{
+	var eventType = DetermineEvent(message);
+	
+	switch (eventType)
 	{
-		Console.WriteLine("--> RabbitMQ Connection Shutdown");
-		await Task.CompletedTask;
+		case EventType.OrderPublished:
+			await RemoveShoppingCart(message);
+			break;
+		default:
+			break;
 	}
 }
 \end{lstlisting}
 
-\begin{lstlisting}[style=mystyleA, caption=MessageBusSub.cs (Microservice), label=lst:MicroMessageBusSb]
-public class MessageBusSub
-{
-	private readonly IConfiguration _config;
-	private readonly IEventProcessor _eventProcessor;
-	private readonly ConnectionFactory _factory;
-	private IConnection _connection;
-	private IChannel _channel;
-	private QueueDeclareOk _queue;
-	private string _queueName;
-	
-	public MessageBusSub(IConfiguration config, IEventProcessor eventProcessor)
-	{
-		_config = config;
-		_eventProcessor = eventProcessor;
-		_factory = new ConnectionFactory
-		{
-			HostName = _config["RabbitMQHost"],
-			Port = int.Parse(_config["RabbitMQPort"])
-		};
-	}
-	
-	public async Task InitializeRabbitMQAsync()
-	{
-		try
-		{
-			_connection = await _factory.CreateConnectionAsync();
-			_channel = await _connection.CreateChannelAsync();
-			
-			await _channel.ExchangeDeclareAsync(exchange: "trigger", type: ExchangeType.Fanout);
-			
-			_queue = await _channel.QueueDeclareAsync();
-			_queueName = _queue.QueueName;
-			await _channel.QueueBindAsync(queue: _queueName, exchange: "trigger", routingKey: "");
-			
-			Console.WriteLine("--> Listening to the Message Bus...");
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"--> Could not connect to message bus: {ex.Message}");
-		}
-		
-		WaitForEvents();
-	}
-	
-	private async void WaitForEvents()
-	{
-		var consumer = new AsyncEventingBasicConsumer(_channel);
-		
-		consumer.ReceivedAsync += (model, ea) =>
-		{
-			Console.WriteLine("--> Event Received!");
-			byte[] body = ea.Body.ToArray();
-			var message = Encoding.UTF8.GetString(body);
-			_eventProcessor.ProcessEvent(message);
-			return Task.CompletedTask;
-		};
-		
-		await _channel.BasicConsumeAsync(queue: _queueName, autoAck: true, consumer: consumer);
-	}
-}
+\subsection{Kubernetes deployment}
+
+Zoals eerder vermeld in \hyperref[containerisatie_orkestratie]{containerisatie en orkestratie} worden de microservices beheert via Kubernetes. Elke microservice heeft een aantal YAML-bestanden: een deployment YAML voor de deployment van de service; een NodePort YAML om de service extern toegankelijk te maken; een SQL deployment YAML voor de bijhorende database. Hieronder volgt een voorbeeld van de YAML-bestanden van de \texttt{ProductService}.\newline
+
+Het fragment een voorbeeld van een service deployment. Hierin wordt vermeldt op welke Docker image de deployment gebasseerd moet zijn. Alsook wordt een \texttt{ClusterIP} ingesteld zodat, indien nodig, andere services deze service kunnen aanspreken via deze identifier.\medskip
+
+\begin{lstlisting}[style=mystyleA, caption=bpproducts-depl.yaml, label=lst:BPProductsDepl]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: bpproducts-depl
+spec:
+	replicas: 1
+	selector:
+		matchLabels:
+			app: bpproductservice
+	template:
+		metadata:
+			labels:
+				app: bpproductservice
+		spec:
+			containers:
+				- name: bpproductservice
+  		  		  image: hogentjaspervandenbroucke/bpproductservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: bpproducts-clusterip-service
+spec:
+	type: ClusterIP
+	selector:
+		app: bpproductservice
+	ports:
+		- name: bpproductservice
+  		  protocol: TCP
+  		  port: 8080
+  		  targetPort: 8080
 \end{lstlisting}
 
-\begin{lstlisting}[style=mystyleA, caption=EventProcessor.cs (Microservice), label=lst:MicroEventPrc]
-public class EventProcessor : IEventProcessor
-{
-	private readonly IServiceScopeFactory _scopeFactory;
-	private readonly IMapper _mapper;
-	
-	public EventProcessor(IServiceScopeFactory scopeFactory, IMapper mapper)
-	{
-		_scopeFactory = scopeFactory;
-		_mapper = mapper;
-	}
-	
-	public async Task ProcessEvent(string message)
-	{
-		var eventType = DetermineEvent(message);
-		
-		switch (eventType)
-		{
-			case EventType.OrderPublished:
-				await RemoveShoppingCart(message);
-				break;
-			default:
-				break;
-		}
-	}
-	
-	private EventType DetermineEvent(string notificationMessage)
-	{
-		Console.WriteLine("--> Determining Event");
-		
-		var eventType = JsonSerializer.Deserialize<GenericEventDto>(notificationMessage);
-		
-		switch (eventType.Event)
-		{
-			case "Order_Published":
-				Console.WriteLine("--> Order Published Event Detected");
-				return EventType.OrderPublished;
-			default:
-				Console.WriteLine("--> Could not determine the event type");
-				return EventType.Undetermined;
-		}
-	}
-	
-	private async Task RemoveShoppingCart(string orderPublishedMessage)
-	{
-		using var scope = _scopeFactory.CreateScope();
-		var repo = scope.ServiceProvider.GetRequiredService<IShoppingCartRepo>();
-		
-		var orderPublishedDto = JsonSerializer.Deserialize<OrderPublishedDto>(orderPublishedMessage);
-		var shoppingCartId = orderPublishedDto.ShoppingCartId;
-		var userId = orderPublishedDto.UserId;
-		
-		try
-		{
-			if (repo.ShoppingCartExists(shoppingCartId, userId))
-			{
-				var cart = await repo.GetCart(userId);
-				repo.DeleteCart(cart);
-				Console.WriteLine("--> ShoppingCart removed");
-			}
-			else
-			{
-				Console.WriteLine("--> ShoppingCart does not exists...");
-			}
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"--> Could not remove ShoppingCart: {ex.Message}");
-		}
-	}
-}
+Vervolgens wordt voor elke service een \texttt{NodePort} opgezet. Deze \texttt{NodePort} krijgt van Kubernetes een uniek id van 5 cijfers, startend met een 3.\medskip
+
+\begin{lstlisting}[style=mystyleA, caption=bpproducts-np-srv.yaml, label=lst:BPProductsNP]
+apiVersion: v1
+kind: Service
+metadata:
+	name: bpproductnpservice-srv
+spec:
+	type: NodePort
+	selector:
+		app: bpproductservice
+	ports:
+		- name: bpproductservice
+		  protocol: TCP
+		  port: 8080
+		  targetPort: 8080
 \end{lstlisting}
+
+Tot slot heeft elke service zijn eigen SQL Server database deployment. Naast de deployment en \texttt{ClusterIP} heeft deze YAML ook een \texttt{LoadBalancer}. Met behulp van de \texttt{LoadBalancer} kan er van buiten Kubernetes connectie gemaakt worden met de database. Om te kunnen connecteren met de databank moet er ingelogd worden met gebruikersnaam en wachtwoord. Het wachtwoord wordt in een Kubernetes Secret opgeslagen.\medskip
+
+\begin{lstlisting}[style=mystyleA, caption=bpproducts-sql-depl.yaml, label=lst:BPProductsSQLDepl]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: bpproducts-sql-depl
+spec:
+	replicas: 1
+	selector:
+		matchLabels:
+			app: bpproducts-sql
+	template:
+		metadata:
+			labels:
+				app: bpproducts-sql
+		spec:
+			containers:
+				- name: bpproducts-sql
+				  image: mcr.microsoft.com/mssql/server:2019-latest
+				  ports:
+					- containerPort: 1433
+				  env:
+					- name: MSSQL_PID
+					  value: "Express"
+					- name: ACCEPT_EULA
+					  value: "Y"
+					- name: SA_PASSWORD
+					  valueFrom:
+						secretKeyRef:
+							name: bp-products-sql
+							key: SA_PASSWORD
+				  volumeMounts:
+					- mountPath: /var/opt/mssql/data
+					  name: sqlproductsdb
+			volumes:
+				- name: sqlproductsdb
+				  persistentVolumeClaim:
+					claimName: bpproducts-sql-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: bpproducts-sql-clusterip-service
+spec:
+	type: ClusterIP
+	selector:
+		app: bpproducts-sql
+	ports:
+		- name: bpproducts-sql
+		  protocol: TCP
+		  port: 1433
+		  targetPort: 1433
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: bpproducts-sql-loadbalancer
+spec:
+	type: LoadBalancer
+	selector:
+		app: bpproducts-sql
+	ports:
+		- protocol: TCP
+		  port: 1433
+		  targetPort: 1433
+\end{lstlisting}
+
+
+
+
+\chapter{\IfLanguageName{dutch}{Resultaten}{Results}}%
+\label{ch:resultaten}
+
+In dit voorlaatste hoofdstuk worden de resultaten besproken die voortkwamen uit het analyseren van de PoC. Eerst worden de bevindingen uit de SonarQube-analyse besproken, waarbij gekeken zal worden naar cyclomatische en cognitieve complexiteit van beide applicaties. Daarna volgen de resultaten van de JMeter testen, waarin wordt gekeken hoe de monolithische en microservices-applicatie zich gedragen onder hoge belasting.
+
+\section{Complexiteit}
+
+De onderstaande tabel toont de resultaten van de cyclomatische en cognitieve complexiteitsanalyse uitgevoerd met SonarQube (Community Edition). Deze resultaten geven een indicatie over de moeilijkheidsgraad van de code van de beide applicaties, maar zijn mogelijks niet volledig representatief voor in een productieomgeving.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Services} & \textbf{Cyclomatische Complexiteit} & \textbf{Cognitieve Complexiteit} \\
+		\hline
+		ProductService        & 46 & 16 \\
+		ShoppingCartService   & 102  & 31 \\
+		OrderService          & 104 & 25 \\
+		AuthService           & 20  & 22 \\
+		\hline
+		\textbf{Microservices-applicatie} & \textbf{272} & \textbf{94} \\
+		\hline
+		\textbf{Monolithische applicatie} & \textbf{180} & \textbf{32} \\
+		\hline
+	\end{tabular}
+	\caption{Complexiteitsanalyse per service}
+\end{table}
+
+\subsection{Microservices-applicatie}
+
+Bij de microservices-applicatie valt op dat de complexiteit sterk varieert per service. De \texttt{OrderService} (104 cyclomatisch, 25 cognitief) en \texttt{ShoppingCartService} (102 cyclomatisch, 31 cognitief) hebben duidelijk de hoogste complexiteit. Deze 2 services bevatten namelijk meer logica, en verantwoordelijkheden, zoals het communiceren met andere services (synchroon en asynchroon) of het publiceren van events op de RabbitMQ message bus.\newline
+
+De \texttt{ProductService} en \texttt{AuthService} zijn eenvoudiger. Deze services bevatten minder complexe logica en hebben daardoor lagere scores. De totalen voor de microservices-applicatie komen neer op 272 cyclomatische en 94 cognitieve complexiteit, verspreid over vier afzonderlijke services.
+
+\subsection{Monolithische applicatie}
+
+De monolithische applicatie heeft daarentegen lagere waarden: een cyclomatische complexiteit van 180 en een cognitieve complexiteit van 32. Deze lagere totalen zijn te wijten aan het feit dat alle logica zich binnen één codebase bevindt, zonder inter-service communicatie of infrastructuurcomplexiteit, zoals RabbitMQ. Hierdoor worden bijvoorbeeld asynchrone communicatie tussen services vermeden, wat in een microservices-architectuur extra code veroorzaakt.\newline
+
+Hoewel de monolithische applicatie minder complex lijkt, zoals blijkt uit de resultaten van SonarQube, betekent dit niet automatisch dat het eenvoudiger is om deze te onderhouden of uit te breiden. De moeilijkheden zit bijvoorbeeld in het doorvoeren van wijzigingen zonder onverwachte bijwerkingen te veroorzaken.
+
+\section{Schaalbaarheid}
+
+
+\subsection{Monolithische applicatie}
+
+
+
+\subsection{Microservices-applicatie}
+
 
 %% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
 %% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
