@@ -1,7 +1,7 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
 \label{ch:stand-van-zaken}
 
-In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Tot slot worden enkele relevante termen uitgebreider behandelt die de werking en structuur van microservices definiëren. Op basis van de informatie uit dit hoofdstuk zal duidelijk worden wat er allemaal komt kijken tijdens het ontwerpen van een proof-of-concept (PoC) in een later deel van de bachelorproef.
+In dit hoofdstuk van de bachelorproef zullen we dieper ingaan op het concept van een microservices-architectuur. Dit zal gebeuren aan de hand van een relevante literatuurstudie. Allereerst zal uitgelegd worden wat een monolithische architectuur is en wat typerend is aan deze stijl van software ontwikkeling. Daarna wordt uitgelegd wat een microservices-architectuur is en hoe deze architectuur verschilt van de klassieke, monolithische aanpak. Tot slot worden enkele relevante termen uitgebreider behandeld die de werking en structuur van microservices definiëren. Op basis van de informatie uit dit hoofdstuk zal duidelijk worden wat er allemaal komt kijken tijdens het ontwerpen van een proof-of-concept (PoC) in een later deel van de bachelorproef.
 
 \section{Wat is een monolithische architectuur?}
 
@@ -51,17 +51,17 @@ Daarnaast vindt \textcite{Blinowski2022} het relevant om te vermelden dat de man
 
 \subsection{Karakteristieken van microservices}
 
-\textcite{Bakshi2017} beschrijft in zijn in gepubliceerde artikel verscheidene kenmerken van microservices. Hieronder zijn enkele relevante kenmerken uitgeschreven.
+\textcite{Bakshi2017} beschrijft in zijn gepubliceerde artikel verscheidene kenmerken van microservices. Hieronder zijn enkele relevante kenmerken uitgeschreven.
 
 \subsubsection{Services opdelen in componenten}
 
 Microservices maken gebruik van componenten die onafhankelijk vervangbaar en uitbreidbaar zijn. Deze componenten communiceren via mechanismen zoals webservices of remote procedure calls (RPC).
 
-Het grootste voordeel bij het werken met aparte componenten is dat deze onafhankelijk kunnen ingezet worden. Waardoor, indien nodig, wijzigingen aan het ene component kunnen doorgevoerd worden zonder de andere te beïnvloeden.
+Het grootste voordeel bij het werken met aparte componenten is dat deze onafhankelijk kunnen worden ingezet, waardoor, indien nodig, wijzigingen aan het ene component kunnen worden doorgevoerd zonder de andere te beïnvloeden.
 
 \subsubsection{Georganiseerd rond bedrijfsfunctionaliteiten}
 
-Microservices worden ontworpen met een focus op bedrijfsfunctionaliteiten, zoals ook al eerder werd aangehaald. Hierbij moet gekeken worden naar een brede implementatie van software voor een specifiek bedrijfsdomein, dit omvat een gebruikersinterface, persistente opslag en externe samenwerkingen.
+Microservices worden ontworpen met een focus op bedrijfsfunctionaliteiten, zoals ook al eerder werd aangehaald. Hierbij moet gekeken worden naar een brede implementatie van software voor een specifiek bedrijfsdomein. Deze implementatie omvat een gebruikersinterface, persistente opslag en externe samenwerkingen.
 
 Dit resulteert in cross-functionele teams, waarbij skills met betrekking tot gebruikservaring, databanken en projectmanagement essentieel zijn.
 
@@ -83,24 +83,25 @@ Een microservices-architectuur moet ontworpen worden zodat wanneer een individue
 
 Een belangrijk hulpmiddel bij het maken van services is het Domain Driven Design (DDD) principe. Binnen DDD wordt een complex domein opgesplitst in kleinere contexten, die elk een eigen verantwoordelijkheid hebben. Deze contexten werken samen, maar zijn onafhankelijk van elkaar.
 
-Daarnaast decentraliseert een microservices-architectuur de manier waarop data wordt opgeslagen en beheert. Monolithische applicaties gebruiken grotendeels één databank. Microservices opteren om elke service zijn eigen databank te laten beheren. Deze aanpak wordt ook wel \hyperref[sec:Polyglot Persistence]{Polyglot Persistence} genoemd.
+Daarnaast decentraliseert een microservices-architectuur de manier waarop data wordt opgeslagen en beheerd. Monolithische applicaties gebruiken grotendeels één databank. Microservices opteren om elke service zijn eigen databank te laten beheren. Deze aanpak wordt ook wel \hyperref[sec:Polyglot Persistence]{Polyglot Persistence} genoemd.
 
 \subsubsection{Flexibiliteit in technologiekeuze}
+\label{sec:flexibiliteit_technologiekeuze}
 
 Doordat services onafhankelijk zijn, kunnen deze ontwikkeld worden met de meest geschikte programmeertaal of technologie, zoals Node.js, Python, Java of C++.
 
 \section{Relevante termen}
 
-In dit gedeelte van de literatuurstudie gaan we dieper in op de begrippen die eerder al aan bod zijn gekomen, om deze verder te verduidelijken. Hierdoor zal het duidelijk worden wat deze begrippen inhouden en hoe deze relevant zijn voor dit onderzoek.
+In dit gedeelte van de literatuurstudie gaan we dieper in op de begrippen die eerder al aan bod zijn gekomen. Hierdoor zal het duidelijk worden wat deze begrippen inhouden en hoe deze relevant zijn voor dit onderzoek. Daarnaast wordt in deze sectie uitgelegd wat Docker en Kubernetes inhouden, aangezien deze technologieën relevant zijn in de proof-of-concept (PoC).
 
 \subsection{Distributed Systems}
 \label{sec:distributed systems}
 
-In de literatuur zijn al diverse definities terug te vinden over gedistribueerde systemen, maar geen enkele stemmen overeen met elkaar \autocite{Steen2018}. Daarom definiëren \textcite{Steen2018} distributed systems als een verzameling van autonome, rekenkundige elementen die voor de gebruikers als één smanehangend systeem lijkt te functioneren.
+In de literatuur zijn al diverse definities terug te vinden over gedistribueerde systemen, maar geen enkele stemmen overeen met elkaar \autocite{Steen2018}. Daarom definiëren \textcite{Steen2018} distributed systems als een verzameling van autonome, rekenkundige elementen die voor de gebruikers als één samenhangend systeem lijkt te functioneren.
 
 Volgens hen benadrukt deze definitie twee kenmerken van gedistribueerde systemen. Het eerste kenmerk is dat een gedistribueerd systeem bestaat uit een verzameling van rekenkundige elementen die onafhankelijk van elkaar kunnen functioneren. Deze elementen kunnen zowel hardware-apparaten als softwareprocessen zijn. Het tweede kenmerk is dat gebruikers, zowel mensen als andere applicaties, de indruk hebben dat ze met één samenhangend systeem te maken hebben. Dit benadrukt dat de elementen op de een of andere manier moeten samenwerken. Hoe deze samenwerking tot stand komt is de kern van gedistribueerde systemen aldus \textcite{Steen2018}.
 
-Gedistribueerde systemen zijn de afgelopen twee decennia in trek wegens de groeiende vraag naar onafhankelijke ontwikkeling en implementatie van webapplicatie \autocite{Raj2021}. Dit soort systemen worden essentieel voor het snel leveren van diensten met behulp van continious integration en continuous development (CI/CD). Éen van de basisarchitecturen binnen gedistribueerde systemen in SOA, hierbij staan services centraal in het ontwerp.
+Gedistribueerde systemen zijn de afgelopen twee decennia in trek wegens de groeiende vraag naar onafhankelijke ontwikkeling en implementatie van webapplicaties \autocite{Raj2021}. Dit soort systemen worden essentieel voor het snel leveren van diensten met behulp van continious integration en continuous development (CI/CD). Een van de basisarchitecturen binnen gedistribueerde systemen is Service-Oriented Architecture (SOA), waarbij services centraal staan in het ontwerp.
 
 \subsection{Service-Oriented Architecture}
 \label{sec:SOA_architectuur}
@@ -114,9 +115,9 @@ Volgens \textcite{Muhardany2020} is SOA een ontwerparchitectuur die helpt bij he
 De basis van SOA bestaat uit drie hoofdcomponenten \autocite{Muhardany2020}:
 
 \begin{itemize}
-	\item \textbf{Bedrijfsarchitectuur} - Dit component is gebaseerd op de bedrijfsstrategieën, doelen, voorkeuren en methoden. Het is de meest cruciale factor voor een succesvolle implementatie van SOA. De bedrijfsarchitectuur zorgt ervoor dat de technische implementatie van SOA aansluit bij de algemen bedrijfsdoelen.
-	\item \textbf{Infrastructuurarchitectuur} - Deze architectuur richt zich op alle aspecten van de technische ondersteuning van SOA, zoals netwerken, servers, datacenters, filewalls, infrastructuurgebruik, veiligheid, monitoring en middleware. Het zorgt ervoor dat de benodigde technische infrastructuur aanwezig is om de services van SOA te ondersteunen.
-	\item \textbf{Informatie- en data-architectuur} - Het derde component definieert de afspraken omtrent de benodigde informatie en succesfactoren die nodig zijn om de doelen van het bedrijf te ondersteunen. Het zorgt ervoor dat de juiste informatie beschikbaar is om de prestaties van de services te meten en te verbetern.
+	\item \textbf{Bedrijfsarchitectuur} - De bedrijfsarchitectuur heeft betrekking op de bedrijfsstrategieën, doelen, voorkeuren en methoden. Het is de meest cruciale factor voor een succesvolle implementatie van SOA. De bedrijfsarchitectuur zorgt ervoor dat de technische implementatie van SOA aansluit bij de algemene bedrijfsdoelen.
+	\item \textbf{Infrastructuurarchitectuur} - Deze architectuur richt zich op alle aspecten van de technische ondersteuning van SOA, zoals netwerken, servers, datacenters, firewalls, infrastructuurgebruik, veiligheid, monitoring en middleware. Het zorgt ervoor dat de benodigde technische infrastructuur aanwezig is om de services van SOA te ondersteunen.
+	\item \textbf{Informatie- en data-architectuur} - De informatie- en data-architectuur omvat de afspraken omtrent de benodigde informatie en succesfactoren die nodig zijn om de doelen van het bedrijf te ondersteunen. Het zorgt ervoor dat de juiste informatie beschikbaar is om de prestaties van de services te meten en te verbeteren.
 \end{itemize}
 
 \subsubsection{SOA vs Microservices}
@@ -157,9 +158,9 @@ Enterprise Service Bus (ESB) is een systeem dat een geïntegreerde en flexibele 
 
 Polyglot persistence is een concept dat afkomstig is uit polyglot programmeren \autocite{Kazanavicius2022}. Het idee achter dit concept is om de juiste tool te kiezen voor een specifieke taak, waarbij in polyglot persistence verschillende databases worden gebruikt om diverse soorten data optimaal op te slaan. Geen enkele database (SQL of NoSQL) kan alle uitdagingen oplossen, die komen kijken wanneer we spreken over data opslag.
 
-Polyglot persistence kan gezien worden als een reactie op de opkomst van NoSQL-databases en de groeiende vraag naar flexibele en schaarlbare dataopslag \autocite{Candel2022}. Door deze toenemende populariteit van NoSQL onstond de behoeft voor een hybride benadering waarbij verschillende databases worden gecombineerd op basis van de specifieke behoeften van een applicatie. Polyglot persistence wordt steeds vaker gezien als de architectuur van de toekomst. Hoewel relationeel database nog steeds het meest gebruikt worden, evolueren ze om bepaalde NoSQL-functionaliteiten te ondersteunen.
+Polyglot persistence kan gezien worden als een reactie op de opkomst van NoSQL-databases en de groeiende vraag naar flexibele en schaalbare dataopslag \autocite{Candel2022}. Door deze toenemende populariteit van NoSQL onstond de behoefte voor een hybride benadering waarbij verschillende databases worden gecombineerd op basis van de specifieke behoeften van een applicatie. Polyglot persistence wordt steeds vaker gezien als de architectuur van de toekomst. Hoewel relationeel databases nog steeds het meest gebruikt worden, evolueren ze om bepaalde NoSQL-functionaliteiten te ondersteunen.
 
-\textcite{Candel2022} benadrukt dat één van de belangrijkste drijfveren achter polyglot persistence de groeiende complexiteit en diversiteit van data in moderne softwaretoepassingen is. Het aangehaalde voorbeeld door \textcite{Candel2022} gaat over leerplatformen, online winkels en sociale netwerken en hoe deze systemen vaak een heel diverse set van data kunnen hebben, die dus kan opgeslagen worden in verschillende database. Polyglot persistence beidt  hiervoor een flexibele en efficiënte manier om diverse databases binnen één systeem te beheren.
+\textcite{Candel2022} benadrukt dat één van de belangrijkste drijfveren achter polyglot persistence de groeiende complexiteit en diversiteit van data in moderne softwaretoepassingen is. Het aangehaalde voorbeeld door \textcite{Candel2022} gaat over leerplatformen, online winkels en sociale netwerken en hoe deze systemen vaak een heel diverse set van data kunnen hebben, die opgeslagen kunnen worden in verschillende databases. Polyglot persistence biedt  hiervoor een flexibele en efficiënte manier om diverse databases binnen één systeem te beheren.
 
 \subsection{Docker}
 
@@ -185,15 +186,15 @@ Figuur \ref{fig:Docker vs VM} toont een vereenvoudigde vergelijking van twee met
 
 \subsection{Kubernetes}
 
-Kubernetes is een open-source orkestratiesysteem voor het beheren van applicaties in containers \autocite{Turin2023}. Met behulp van Kubernetes kunnen applicaties onderhouden en geschaald worden. Binnen Kubernetes draait alles om pods. Deze pods bevatten opzich dan nog verschillende componenten om services te beheren. 
+Kubernetes is een open-source orkestratiesysteem voor het beheren van applicaties in containers \autocite{Turin2023}. Met behulp van Kubernetes kunnen applicaties onderhouden en geschaald worden. Binnen Kubernetes draait alles om pods. Deze pods bevatten op zich dan nog verschillende componenten om services te beheren. 
 
 \begin{itemize}
-	\item \textbf{Containers en pods} - Kubernetes gebruikt containers, zoals Docker-containers om pods te draaien. Een pod is het kleinste componenet binnen Kubernetes en bevat één of meedere containers die dan samen op een node worden geplaatst. Pods communiceren onderling via IP-adressen, maar deze adressen zijn niet statisch en worden telkens toegekend wanneer de pods herstarten.
+	\item \textbf{Containers en pods} - Kubernetes gebruikt containers, zoals Docker-containers om pods te draaien. Een pod is het kleinste component binnen Kubernetes en bevat één of meedere containers die dan samen op een node worden geplaatst. Pods communiceren onderling via IP-adressen, maar deze adressen zijn niet statisch en worden telkens toegekend wanneer de pods herstarten.
 	\item \textbf{Nodes en clusterbeheer} - Een cluster in Kubernetes bestaat uit nodes. De master node regelt de coördinatie tussen de verschillende nodes. Worker nodes draaien de pods en hebben CPU- en geheugencapaciteiten. Om de pods toe te kennen aan de nodes is er de scheduler, die op basis van beschikbare resources en de vereisten van de applicatie de pods zal verdelen.
 	\item \textbf{Services} - Een service is een verzameling van pods die eenzelfde functie uitvoeren en als één entitiet worden gepresenteerd via een service-endpoint. Dit maakt het eenvoudiger om verzoeken naar de juiste back-end containers te routeren, zelfs wanneer deze veranderen of worden vervangen. Standaard zijn services alleen intern toegankelijk, maar ze kunnen ook extern beschikbaar gemaakt worden.
 \end{itemize}
 
-Kubernetes zorgt ervoor dat pods automatisch worden aangemaakt en opnieuw gestart \autocite{Vayghan2021}. Pods zijn dynamisch kunnen worden verplaatst of verwijderd, veranderen hun IP-adressen voortdurend, wat een slechte invloed heeft op de communicatie tussen pods. Om dit tegen te gaan, krijgen pods labels die bijgehouden blijven, zelfs wanneer ze opnieuw worden aangemaakt. Daarnaast maakt Kubernetes gebruik van services, die een vast IP-adres hebben en netwerkverkeer verdelen over de verschillende pods, waardoor stabiele en efficiënte communicatie tussen componeneten mogelijk wordt.
+Kubernetes zorgt ervoor dat pods automatisch worden aangemaakt en opnieuw gestart \autocite{Vayghan2021}. Pods zijn dynamisch: ze kunnen worden verplaatst of verwijderd, en hun IP-adressen veranderen voortdurend. Dit heeft een negatieve invloed op de communicatie tussen pods. Om dit tegen te gaan, krijgen pods labels die bijgehouden blijven, zelfs wanneer ze opnieuw worden aangemaakt. Daarnaast maakt Kubernetes gebruik van services, die een vast IP-adres hebben en netwerkverkeer verdelen over de verschillende pods, waardoor stabiele en efficiënte communicatie tussen componeneten mogelijk wordt.
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het

@@ -14,6 +14,42 @@
 \usepackage{lipsum} % For blind text, can be removed after adding actual content
 \usepackage[absolute,showboxes]{textpos}
 
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinelanguage{CSharp}{
+	morekeywords={abstract, event, new, struct, as, explicit, null, switch, base,
+		extern, object, this, bool, false, operator, throw, break, finally, out,
+		true, byte, fixed, override, try, case, float, params, typeof, catch, for,
+		private, uint, char, foreach, protected, ulong, checked, goto, public,
+		unchecked, class, if, readonly, unsafe, const, implicit, ref, ushort,
+		continue, in, return, using, decimal, int, sbyte, virtual, default,
+		interface, sealed, volatile, delegate, internal, short, void, do, is,
+		sizeof, while, double, lock, stackalloc, else, long, static, enum, namespace,
+		string, var},
+	sensitive=true,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]",
+}
+\lstdefinestyle{mystyleA}{
+language=CSharp,
+basicstyle=\ttfamily\small,
+keywordstyle=\color{blue},
+commentstyle=\color{gray},
+stringstyle=\color{orange},
+backgroundcolor=\color{gray!4},
+numbers=left,
+numberstyle=\tiny\color{gray},
+stepnumber=1,
+numbersep=5pt,
+frame=lines,
+showstringspaces=false,
+tabsize=2,
+breaklines=true,
+captionpos=b,
+label=lst:voorbeeldcode,
+}
+
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
 \setlength{\parindent}{0mm}
