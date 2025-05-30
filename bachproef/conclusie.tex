@@ -5,6 +5,55 @@
 \chapter{Conclusie}%
 \label{ch:conclusie}
 
+In dit laatste hoofdstuk worden de bevindingen van deze bachelorproef samengevat. Met behulp van de literatuurstudie, de PoC en de uitgevoerde testen wordt een antwoord gegeven op de onderzoeksvraag. Daarnaast wordt er gereflecteerd op de resultaten van de testen en wordt er besproken welke meerwaarde dit onderzoek biedt voor het stagebedrijf Fabrimode. Tot slot worden nog enkele suggesties gedaan voor toekomstig onderzoek.
+
+\section{Antwoord op de onderzoeksvraag}
+
+De onderzoeksvraag van deze bachelorproef luidt als volgt:
+
+\textit{Welke impact heeft een microservices-architectuur op de schaalbaarheid en ontwikkelingscomplexiteit van een webapplicatie?}\newline
+
+De literatuurstudie, de PoC en de analyses tonen aan dat het correct implementeren van een microservices-architectuur een aanzienlijke uitdaging is. De integratie van diverse technologieën zoals RabbitMQ, Ingress Nginx en Kubernetes dragen bij aan deze complexiteit.
+
+Wat de eerste deelvraag betreft — \textit{Hoe presteert een microservices-architectuur in vergelijking met een monolithische architectuur op het gebied van schaalbaarheid?} — is theoretisch gezien de microservices-architectuur effectiever in het schalen van onafhankelijke services. In de PoC vertoonde de microservices-applicatie bij een lage tot matige belasting goede prestaties. Echter, vanaf 200 gebruikers verminderde de prestatie sneller dan bij de monolithische applicatie, met oplopende responstijden en foutpercentages. Dit wijst op mogelijke moeilijkheden met interservice communicatie.
+
+Met betrekking tot de tweede deelvraag — \textit{Welke aspecten moeten in acht genomen worden bij het overstappen naar een microservices-architectuur?} — toont dit onderzoek aan dat de overstap naar deze architectuur meer inhoudt dan enkel coderen. Er zijn verschillende cruciale aspecten waarmee rekening gehouden moet worden:
+
+\begin{itemize}
+	\item \textbf{Technologiekeuze} - Bij het implementeren van een microservices-architectuur is het van groot belang om technologieën zoals RabbitMQ (voor communicatie), Ingress Nginx (voor routing en load balancing) en Kubernetes (voor containerorkestratie) correct te configureren en beheren.
+	\item \textbf{Communicatie} - Fouten in interservice communicatie, veroorzaakt door een incorrecte implementatie van synchrone (bijv. via HTTP) of asynchrone (bijv. via RabbitMQ) communicatie, kunnen al snel leiden tot prestatieproblemen of functionaliteiten die niet werken.
+	\item \textbf{Opsplitsing van services} - Een correcte opsplitsing van de afzonderlijke services is cruciaal. Elke service moet namelijk verantwoordelijk zijn voor een specifieke bedrijfsfunctionaliteit.
+\end{itemize}
+
+Voor de derde en laaste deelvraag — \textit{Welke technologieën en tools zijn essentieel voor het implementeren en beheren van een microservices-architectuur?} — blijkt dat naast Docker en Kubernetes ook technologieën zoals RabbitMQ en tools zoals Ingress Nginx onmisbaar zijn voor een correcte afhandeling van communicatie en routing tussen services.\newline
+
+Om de onderzoeksvraag te beantwoorden kan er geconcludeerd worden dat een microservices-architectuur voordelen biedt op het vlak van schaalbaarheid, maar dat deze voordelen gepaard gaan met een verhoogde complexiteit, waardoor een doordacht plan van aanpak en een optimale infrastructuur essentieel zijn voor een succesvolle implementatie.
+
+\section{Reflectie}
+
+Het resultaat van deze bachelorproef komt grotendeels overeen met de initiële verwachtingen. 
+Zoals vooraf verondersteld, bleek de microservices-architectuur complexer om te implementeren dan de monolithische applicatie. Dit werd bevestigd door de hogere cyclomatische en cognitieve complexiteit.
+
+Wat minder voorspelbaar was, is dat de prestaties van de microservices-applicatie onder hoge belasting niet significant beter waren dan die van de monolithische applicatie. In sommige gevallen presteerde de monolithische variant zelfs stabieler, met een lager foutpercentage en hogere throughput.
+
+Het is van belang dat deze bevindingen met de nodige nuance geïnterpreteerd worden. Hoewel de microservices-applicatie werd gecontaineriseerd met Docker en beheerd via Kubernetes, werden de testen uitgevoerd op een laptop. Dit betekent dat de beschikbare rekenkracht en netwerkcapaciteit beperkt waren ten opzichte van een professionele ontwikkelingsomgeving. In een productieomgeving, met bijvoorbeeld een gedistribueerde infrastructuur of schaalbare clouddiensten, zouden de voordelen van een microservices-architectuur hoogstwaarschijnlijk beter tot hun recht komen.
+
+\section{Meerwaarde}
+
+Na het ontwikkelen en analyseren van zowel een monolithische als een microservices-applicatie, bieden de resultaten waardevolle inzichten voor de ontwikkelaars bij Fabrimode.
+
+De resultaten met betrekking tot de complexiteit bieden een indicatie van de uitdagingen die een microservices-architectuur met zich mee kan brengen.
+
+Echter, de bevindingen omtrent de schaalbaarheid moeten met voorzichtigheid geïnterpreteerd worden. Omdat de analyses niet zijn uitgevoerd op een server- of cloudinfrastructuur, kunnen de resultaten afwijken van die in een ontwikkelingsomgeving met optimale infrastructuur.
+
+\section{Toekomstig onderzoek}
+
+Tijdens het uitwerken van deze bachelorproef en het ontwikkelen van de PoC kwamen een aantal vragen naar boven die tot verder onderzoek uitnodigen.
+
+Hoe beïnvloedt het gebruik van containersoftware, zoals Docker en Kubernetes, de prestaties en schaalbaarheid van microservices in een productieomgeving? Het onderzoeken van deze vraag kan immers een grote impact hebben op de efficiëntie van een microservices-architectuur.
+
+Daarnaast kan het belangrijk zijn om te onderzoeken welke monitoringtools het meest effectief zijn bij het beheren van microservices. Hierbij is het doel om de verhoogde complexiteit beter te beheersen en knelpunten vroegtijdig te detecteren.
+
 % TODO: Trek een duidelijke conclusie, in de vorm van een antwoord op de
 % onderzoeksvra(a)g(en). Wat was jouw bijdrage aan het onderzoeksdomein en
 % hoe biedt dit meerwaarde aan het vakgebied/doelgroep? 
@@ -13,6 +62,4 @@
 % niet duidelijk zijn?
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
 %onderzoek?
-
-\lipsum[76-80]
 

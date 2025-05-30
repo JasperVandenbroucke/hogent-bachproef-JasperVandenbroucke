@@ -38,6 +38,10 @@ Voor de communicatie tussen de diverse services van de microservices-applicatie 
 	\item \textbf{HTTP} – Voor eenvoudige en directe communicatie tussen services wordt gebruikgemaakt van een HTTP-client. Deze vorm van synchrone communicatie is geschikt wanneer een service onmiddellijk een antwoord van een andere service nodig heeft, bijvoorbeeld bij het opvragen van productgegevens. Hoewel deze aanpak minder losgekoppeld is dan asynchrone communicatie, blijft het een praktische manier van communicatie in een microservices-architectuur.
 \end{itemize}
 
+\subsection{Ingress Nginx}
+
+Voor het beheren van inkomend verkeer naar de verschillende services binnen de microservices-architectuur wordt gebruikgemaakt van een Ingress Nginx controller. Deze controller regelt de toegang tot de afzonderlijke services op basis van vooraf gedefinieerde routes. Hiermee kan bijvoorbeeld verkeer naar een specifieke URL (bijv. alle requests die beginnen met \textit{/api/products}) worden doorgestuurd naar de juiste service.
+
 \subsection{Database}
 
 Tot slot voor de database is er ook volgens het polyglot persistence principe een vrijheid in welke type database er gekozen wordt. Voor de eenvoud van deze PoC zal er gekozen worden voor SQL Server. Zowel de monolithische als de microservices-applicatie zullen dezelfde database-engine gebruiken. Bij de microservices krijgt elke service een eigen, aparte database.
@@ -706,52 +710,184 @@ spec:
 \chapter{\IfLanguageName{dutch}{Resultaten}{Results}}%
 \label{ch:resultaten}
 
-In dit voorlaatste hoofdstuk worden de resultaten besproken die voortkwamen uit het analyseren van de PoC. Eerst worden de bevindingen uit de SonarQube-analyse besproken, waarbij gekeken zal worden naar cyclomatische en cognitieve complexiteit van beide applicaties. Daarna volgen de resultaten van de JMeter testen, waarin wordt gekeken hoe de monolithische en microservices-applicatie zich gedragen onder hoge belasting.
+In dit voorlaatste hoofdstuk worden de resultaten besproken die voortkomen uit het analyseren van de PoC. Eerst worden de bevindingen uit de SonarQube-analyse besproken, waarbij gekeken zal worden naar cyclomatische en cognitieve complexiteit van beide applicaties. Daarna volgen de resultaten van de JMeter testen, waarin wordt gekeken hoe de monolithische en microservices-applicatie zich gedragen onder hoge belasting.
 
 \section{Complexiteit}
 
-De onderstaande tabel toont de resultaten van de cyclomatische en cognitieve complexiteitsanalyse uitgevoerd met SonarQube (Community Edition). Deze resultaten geven een indicatie over de moeilijkheidsgraad van de code van de beide applicaties, maar zijn mogelijks niet volledig representatief voor in een productieomgeving.
+De onderstaande tabel toont de scores van de cyclomatische en cognitieve complexiteitsanalyse uitgevoerd met SonarQube (Community Edition). Deze resultaten geven een indicatie over de moeilijkheidsgraad van de code van de beide applicaties, maar zijn mogelijks niet volledig representatief voor een productieomgeving.
+
+Cyclomatische complexiteit toont het aantal mogelijke vertakkingen in de code, terwijl cognitieve complexiteit aantoont hoe moeilijk de code is om te begrijpen. Hoe hoger de scores, hoe ingewikkelder het meestal is om de code te onderhouden of aan te passen.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|c|c|}
-		\hline
-		\textbf{Services} & \textbf{Cyclomatische Complexiteit} & \textbf{Cognitieve Complexiteit} \\
-		\hline
-		ProductService        & 46 & 16 \\
-		ShoppingCartService   & 102  & 31 \\
-		OrderService          & 104 & 25 \\
-		AuthService           & 20  & 22 \\
-		\hline
-		\textbf{Microservices-applicatie} & \textbf{272} & \textbf{94} \\
-		\hline
-		\textbf{Monolithische applicatie} & \textbf{180} & \textbf{32} \\
-		\hline
-	\end{tabular}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{Services / Applicatie} & \textbf{Cyclomatische Complexiteit} & \textbf{Cognitieve Complexiteit} \\
+			\hline
+			ProductService        & 46 & 16 \\
+			ShoppingCartService   & 102  & 31 \\
+			OrderService          & 104 & 25 \\
+			AuthService           & 20  & 22 \\
+			\hline
+			\textbf{Microservices-applicatie} & \textbf{272} & \textbf{94} \\
+			\hline
+			\textbf{Monolithische applicatie} & \textbf{180} & \textbf{32} \\
+			\hline
+		\end{tabular}
+	}
 	\caption{Complexiteitsanalyse per service}
 \end{table}
 
 \subsection{Microservices-applicatie}
 
-Bij de microservices-applicatie valt op dat de complexiteit sterk varieert per service. De \texttt{OrderService} (104 cyclomatisch, 25 cognitief) en \texttt{ShoppingCartService} (102 cyclomatisch, 31 cognitief) hebben duidelijk de hoogste complexiteit. Deze 2 services bevatten namelijk meer logica, en verantwoordelijkheden, zoals het communiceren met andere services (synchroon en asynchroon) of het publiceren van events op de RabbitMQ message bus.\newline
+Bij de microservices-applicatie valt op dat de complexiteit sterk varieert per service. De \texttt{OrderService} (104 cyclomatisch, 25 cognitief) en \texttt{ShoppingCartService} (102 cyclomatisch, 31 cognitief) hebben duidelijk de hoogste complexiteit. Dit komt doordat deze services verantwoordelijk zijn voor complexere logica, zoals communicatie met andere services (zowel synchroon als asynchroon) en het publiceren van events via RabbitMQ.\newline
 
-De \texttt{ProductService} en \texttt{AuthService} zijn eenvoudiger. Deze services bevatten minder complexe logica en hebben daardoor lagere scores. De totalen voor de microservices-applicatie komen neer op 272 cyclomatische en 94 cognitieve complexiteit, verspreid over vier afzonderlijke services.
+De \texttt{ProductService} en \texttt{AuthService} zijn eenvoudiger en bevatten minder logica, wat resulteert in lagere complexiteitsscores. In totaal komt de microservices-applicatie uit op een cyclomatische complexiteit van 272 en een cognitieve complexiteit van 94, verdeeld over vier afzonderlijke services.
 
 \subsection{Monolithische applicatie}
 
-De monolithische applicatie heeft daarentegen lagere waarden: een cyclomatische complexiteit van 180 en een cognitieve complexiteit van 32. Deze lagere totalen zijn te wijten aan het feit dat alle logica zich binnen één codebase bevindt, zonder inter-service communicatie of infrastructuurcomplexiteit, zoals RabbitMQ. Hierdoor worden bijvoorbeeld asynchrone communicatie tussen services vermeden, wat in een microservices-architectuur extra code veroorzaakt.\newline
+De monolithische applicatie heeft lagere scores: een cyclomatische complexiteit van 180 en een cognitieve complexiteit van 32. Deze lagere scores zijn te wijten aan het feit dat alle logica zich binnen één codebase bevindt, zonder interservice communicatie of infrastructuurcomplexiteit, zoals RabbitMQ. Hierdoor worden bijvoorbeeld asynchrone communicatie tussen services vermeden, wat in een microservices-architectuur extra code veroorzaakt.\newline
 
-Hoewel de monolithische applicatie minder complex lijkt, zoals blijkt uit de resultaten van SonarQube, betekent dit niet automatisch dat het eenvoudiger is om deze te onderhouden of uit te breiden. De moeilijkheden zit bijvoorbeeld in het doorvoeren van wijzigingen zonder onverwachte bijwerkingen te veroorzaken.
+Hoewel de monolithische applicatie minder complex lijkt, betekent dit niet automatisch dat het eenvoudiger is om deze te onderhouden of uit te breiden. De moeilijkheden zitten bijvoorbeeld in het doorvoeren van wijzigingen zonder onverwachte bijwerkingen te veroorzaken.
 
 \section{Schaalbaarheid}
 
+De schaalbaarheidstesten zijn uitgevoerd op een laptop, wat automatisch inhoud dat de beschikbare rekenkracht en netwerkcapaciteit beperkt zijn ten opzicht van een productieomgeving met server- of cloudinfrastructuur. De resultaten moeten dan ook vanuit deze situatie geïnterpreteerd worden.\newline
+
+Om de schaalbaarheid van beide applicaties realistisch te kunnen analyseren, werden vijf verschillende gebruikersflows gedefinieerd. Deze flows stellen typische acties voor die gebruikers op verschillende momenten kunnen uitvoeren.\newline
+
+Voor de loadtesten werden verschillende gebruikersaantallen gesimuleerd: 10, 50, 100, 200, 250, 500 en 1000 gelijktijdige gebruikers. Bij elke test werd het totaal aantal gebruikers gelijk verdeeld over de vijf flows, wat neerkomt op 20\% van de gebruikers per flow.
+
+Hieronder volgt een overzicht van de gebruikersflows:
+
+\begin{itemize}
+	\item \textbf{Flow 1}
+	\begin{enumerate}
+		\item Login
+		\item Bekijk productenoverzicht
+		\item Zoek specifiek product
+		\item Voeg product toe aan winkelwagen (3x)
+		\item Plaats bestelling
+	\end{enumerate}
+	
+	\item \textbf{Flow 2}
+	\begin{enumerate}
+		\item Login
+		\item Bekijk bestellingen
+		\item Voeg toe aan winkelwagen (2x)
+		\item Plaats bestelling
+		\item Voeg toe aan winkelwagen (2x)
+		\item Plaats bestelling
+		\item Bekijk bestellingen
+	\end{enumerate}
+	
+	\item \textbf{Flow 3}
+	\begin{enumerate}
+		\item Foutief inloggen (wachtwoord)
+		\item Opnieuw inloggen (goed)
+		\item Zoek specifiek product (foutief)
+		\item Voeg product toe aan winkelwagen (1x)
+		\item Voeg product toe aan winkelwagen (foutief)
+		\item Bekijk winkelwagen
+	\end{enumerate}
+	
+	\item \textbf{Flow 4}
+	\begin{enumerate}
+		\item Login
+		\item Voeg product toe aan winkelwagen (4x)
+		\item Bekijk productenoverzicht
+		\item Plaats bestelling
+		\item Voeg product toe aan winkelwagen (2x)
+		\item Bekijk winkelwagen
+		\item Voeg product toe aan winkelwagen (1x)
+		\item Plaats bestelling
+		\item Bekijk bestellingen
+	\end{enumerate}
+	
+	\item \textbf{Flow 5}
+	\begin{enumerate}
+		\item Registreren nieuwe gebruiker
+		\item Foutief inloggen (gebruikersnaam)
+		\item Opnieuw inloggen (goed)
+		\item Bekijk productenoverzicht
+		\item Voeg product toe aan winkelwagen (2x)
+		\item Bekijk bestellingen
+		\item Plaats bestelling
+	\end{enumerate}
+\end{itemize}
+
+Bij de analyse van bovenstaande flows werd voornamelijk gekeken naar de gemiddelde responstijd (in milliseconden), het foutpercentage, de hoeveelheid requests die verwerkt worden per seconde (throughput) en de hoeveelheid ontvangen en verzonden kilobytes per seconde.
 
 \subsection{Monolithische applicatie}
 
+De tabel hieronder toont de resultaten van de JMeter-loadtesten voor de monolithische applicatie, waarbij elke gebruiker één van de vijf vooraf gedefinieerde gebruikersflows doorliep.
 
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline
+			\textbf{Gebruikers} & \textbf{Gem. Responstijd (ms)} & \textbf{Foutpercentage \%} & \textbf{Throughput} & \textbf{Ontvangen KB/sec} & \textbf{Verzonden KB/sec} \\
+			\hline
+			10 & 49 & 9.30\% & 3.8/sec & 1.62 & 1.55 \\
+			\hline
+			50 & 67 & 9.30\% & 18.8/sec & 17.08 & 7.65 \\
+			\hline
+			100 & 222 & 9.30\% & 34.3/sec & 50.49 & 13.95 \\
+			\hline
+			200 & 786 & 9.30\% & 55.4/sec & 144.14 & 22.61 \\
+			\hline
+			250 & 1586 & 9.30\% & 53.1/sec & 170.86 & 21.71 \\
+			\hline
+			500 & 4826 & 9.30\% & 59.4/sec & 347.27 & 24.30 \\
+			\hline
+			1000 & 10675 & 35.57\% & 59.7/sec & 507.67 & 22.79 \\
+			\hline
+		\end{tabular}
+	}
+	\caption{Overzicht van JMeter-resultaten voor de monolithische applicatie.}
+\end{table}
+
+De bovenstaande resultaten van de JMeter-loadtesten tonen aan dat de prestatie van de monolithische applicatie bij toenemende gebruikersaantallen geleidelijk vermindert. De applicatie blijft relatief stabiel tot ongeveer 200 gelijktijdige gebruikers, met een foutpercentage van 9.30\% en een aanvaardbare responstijd. Echter naarmate het aantal gebruikers toeneemt, stijgt de gemiddelde responstijd. Bij 500 gebruikers bedraagt deze al meer dan 4 seconden, en bij 1000 gebruikers loopt deze op tot meer dan 10 seconden. Tegelijkertijd stijgt het foutpercentage bij 1000 gebruikers tot 35.57\%, wat kan wijzen op een overbelasting.
+
+De throughput vertoont in het algemeen een stijgende trend, met een toename van 3.8/sec bij 10 gebruikers tot 59.7/sec bij 1000 gebruikers. Deze hogere throughput gaat echter wel gepaard met een verhoogd foutpercentage, wat erop wijst dat veel requests wel worden ontvangen maar niet altijd correct worden verwerkt.
 
 \subsection{Microservices-applicatie}
 
+De onderstaande tabel toont de JMeter-resultaten voor de microservices-applicatie.
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline
+			\textbf{Gebruikers} & \textbf{Gem. Responstijd (ms)} & \textbf{Foutpercentage \%} & \textbf{Throughput} & \textbf{Ontvangen KB/sec} & \textbf{Verzonden KB/sec} \\
+			\hline
+			10 & 30 & 9.30\% & 3.8/sec & 1.87 & 1.33 \\
+			\hline
+			50 & 248 & 9.30\% & 17.2/sec & 19.21 & 6.02 \\
+			\hline
+			100 & 757 & 9.30\% & 29.2/sec & 54.75 & 10.27 \\
+			\hline
+			200 & 4835 & 10.70\% & 24.0/sec & 55.75 & 8.41 \\
+			\hline
+			250 & 7173 & 13.44\% & 21.7/sec & 58.42 & 7.60 \\
+			\hline
+			500 & 14678 & 16.21\% & 23.0/sec & 120.11 & 8.04 \\
+			\hline
+			1000 & 10675 & 54.23\% & 54.1/sec & 193.97 & 16.33 \\
+			\hline
+		\end{tabular}
+	}
+	\caption{Overzicht van JMeter-resultaten voor de microservices-applicatie.}
+\end{table}
+
+De resultaten tonen dat bij een lage tot matige belasting (10 tot 100 gelijktijdige gebruikers) de responstijden relatief laag blijven, met een foutpercentage van 9.30\%. Vanaf 200 gebruikers nemen de responstijden echter fors toe, namelijk tot een gemiddelde van 4.8 seconden. Bij 500 gebruikers stijgt dit zelfs tot ruim 14 seconden. Wat opvalt bij het foutpercentage is dat dit gelijklopend is t.e.m. 100 gebruikers, maar daarna gestaag toeneemd tot 16.21\% bij 500 gebruikers en zelfs tot 54.23\% bij 1000 gebruikers.
+
+De throughput bij de microservices applicatie vertoont wisselende resultaten. Tussen de 10 en 100 gebruikers stijgt de throughput van 3.8 naar 29.2 requests per seconde. Dit wijst erop dat de applicatie efficiënt werkt wanneer de belasting laag is. Echter, vanaf 200 gebruikers daalt de throughput. Hieruit kan afgeleid worden dat de applicatie niet alle inkomende request even efficiënt kan verwerken, mogelijks door de toename in communicatie via HTTP en RabbitMQ.
+
+Bij 1000 gelijktijdige gebruikers stijgt de throughput naar 54.1/sec, wat op het eerste zicht positief lijkt. Maar deze enorme stijging gaat ook gepaard met een zeer hoog foutpercentage (54.23\%). Dit toont aan dat een groot deel van de inkomende request niet afgehandeld kunnen worden.
 
 %% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
 %% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
